@@ -1,56 +1,88 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Meri Stylish Website</title>
+!DOCTYPE html>
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      overflow: hidden;
+    }
 
-    <style>
-        body {
-            background: linear-gradient(to right, #4facfe, #00f2fe);
-            font-family: Arial, sans-serif;
-            text-align: center;
-            color: white;
-        }
+    .card {
+      background: rgba(0,0,0,0.6);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      color: white;
+      width: 350px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      animation: fadeIn 1.5s ease;
+    }
 
-        .box {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 30px;
-            margin: 100px auto;
-            width: 60%;
-            border-radius: 15px;
-            box-shadow: 0px 0px 20px rgba(0,0,0,0.3);
-        }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
 
-        h1 {
-            font-size: 40px;
-        }
+    p {
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
 
-        p {
-            font-size: 20px;
-        }
+    button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      background: #ff7b00;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-        button {
-            background: #ff7b00;
-            border: none;
-            padding: 12px 25px;
-            font-size: 18px;
-            color: white;
-            border-radius: 8px;
-            cursor: pointer;
-        }
+    button:hover {
+      transform: scale(1.1);
+      background: #ff9500;
+    }
 
-        button:hover {
-            background: #ff5500;
-        }
-    </style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
+    .glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.2);
+      filter: blur(100px);
+      border-radius: 50%;
+      animation: move 10s infinite alternate;
+    }
+
+    @keyframes move {
+      from { transform: translate(-100px, -100px); }
+      to { transform: translate(300px, 200px); }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="box">
-        <h1>Hello FahadGamerXD 👋</h1>
-        <p>Welcome to my stylish website 🚀</p>
-        <button onclick="alert('Welcome Bhai 😎')">Click Me</button>
-    </div>
+<div class="glow"></div>
+
+<div class="card">
+  <h1>Hello FahadGamerXD 👋</h1>
+  <p>Welcome to my stylish website 🚀</p>
+  <button onclick="showMessage()">Click Me</button>
+</div>
+
+<script>
+  function showMessage() {
+    alert("Welcome Fahad! 🔥 Your site is working perfectly!");
+  }
+</script>
 
 </body>
 </html>
