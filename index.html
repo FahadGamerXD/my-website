@@ -3,118 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fahad | Premium Portfolio</title>
+<title>Fahad | Frontend Developer</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 
-<!-- AOS Animation -->
-<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-    scroll-behavior: smooth;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
 }
 
-body {
-    background: linear-gradient(135deg, #020617, #0f172a);
-    color: white;
+body{
+    background:#020617;
+    color:white;
 }
 
 /* NAVBAR */
-header {
-    position: fixed;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 60px;
-    background: rgba(2,6,23,0.7);
-    backdrop-filter: blur(12px);
-    z-index: 1000;
+header{
+    position:fixed;
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    padding:20px 60px;
+    background:rgba(2,6,23,0.7);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+}
+
+nav a{
+    color:white;
+    margin:0 15px;
+    text-decoration:none;
 }
 
 /* HERO */
-.hero {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
+.hero{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    flex-wrap:wrap;
+    padding-top:80px;
 }
 
-.hero-text h1 {
-    font-size: 55px;
+.hero-text{
+    max-width:500px;
 }
 
-.hero-text span {
-    color: #38bdf8;
-    text-shadow: 0 0 25px #38bdf8;
+.hero-text h1{
+    font-size:50px;
 }
 
-.btn {
-    margin-top: 20px;
-    padding: 14px 30px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
-    transition: 0.3s;
+.hero-text span{
+    color:#38bdf8;
 }
 
-.btn:hover {
-    transform: scale(1.1);
+.hero-text p{
+    margin:20px 0;
+    color:#cbd5f5;
+}
+
+/* BUTTON */
+.btn{
+    padding:14px 28px;
+    border:none;
+    border-radius:10px;
+    background:#38bdf8;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 /* IMAGE */
-.hero img {
-    width: 270px;
-    border-radius: 50%;
-    box-shadow: 0 0 60px rgba(56,189,248,0.6);
+.hero img{
+    width:260px;
+    border-radius:50%;
+    box-shadow:0 0 40px rgba(56,189,248,0.6);
 }
 
 /* SECTION */
-.section {
-    padding: 100px 20px;
-    text-align: center;
+.section{
+    padding:100px 20px;
+    text-align:center;
 }
 
 /* GRID */
-.grid {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
+.grid{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
 }
 
 /* CARD */
-.card {
-    width: 260px;
-    padding: 25px;
-    border-radius: 15px;
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(15px);
-    transition: 0.4s;
+.card{
+    width:260px;
+    padding:25px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.05);
 }
 
-.card:hover {
-    transform: translateY(-15px);
+/* PROJECT */
+.project img{
+    width:100%;
+    border-radius:10px;
 }
 
-/* PROJECT IMAGE */
-.card img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
+/* CONTACT BOX */
+.contact-box{
+    background:rgba(255,255,255,0.05);
+    padding:30px;
+    border-radius:15px;
+    max-width:400px;
+    margin:auto;
 }
 
-/* FOOTER */
-footer {
-    padding: 20px;
-    text-align: center;
-    background: #020617;
+footer{
+    text-align:center;
+    padding:20px;
 }
 </style>
 </head>
@@ -125,70 +132,70 @@ footer {
     <h2>Fahad</h2>
     <nav>
         <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
+        <a href="#services">Services</a>
         <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
     </nav>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="home">
-    <div class="hero-text" data-aos="fade-right">
-        <h1>Hi, I'm <span>Fahad</span></h1>
-        <p>Frontend Developer creating premium web experiences.</p>
-        <button class="btn">🚀 Hire Me</button>
+    <div class="hero-text">
+        <h1>I Build <span>High-Converting Websites</span></h1>
+        <p>I help brands and businesses create modern, fast, and visually stunning websites that convert visitors into customers.</p>
+        <button class="btn">💰 Hire Me Now</button>
     </div>
 
-    <img src="myphoto.jpg" data-aos="zoom-in">
+    <img src="myphoto.jpg">
 </section>
 
-<!-- ABOUT -->
-<section class="section" id="about" data-aos="fade-up">
-    <h2>About Me</h2>
-    <p>I design and develop modern, fast and visually stunning websites.</p>
-</section>
-
-<!-- SKILLS -->
-<section class="section" id="skills">
-    <h2 data-aos="fade-up">Skills</h2>
+<!-- SERVICES -->
+<section class="section" id="services">
+    <h2>What I Offer</h2>
     <div class="grid">
-        <div class="card" data-aos="fade-up">HTML</div>
-        <div class="card" data-aos="fade-up" data-aos-delay="100">CSS</div>
-        <div class="card" data-aos="fade-up" data-aos-delay="200">JavaScript</div>
+        <div class="card">Landing Page Design</div>
+        <div class="card">Portfolio Websites</div>
+        <div class="card">UI/UX Design</div>
     </div>
 </section>
 
 <!-- PROJECTS -->
 <section class="section" id="projects">
-    <h2 data-aos="fade-up">Projects</h2>
+    <h2>My Work</h2>
     <div class="grid">
-        <div class="card" data-aos="zoom-in">
+        <div class="card project">
             <img src="project1.jpg">
-            <p>Landing Page</p>
+            <p>Modern Landing Page</p>
+            <button class="btn">View Project</button>
         </div>
-        <div class="card" data-aos="zoom-in" data-aos-delay="100">
+
+        <div class="card project">
             <img src="project2.jpg">
-            <p>Portfolio</p>
+            <p>Creative Portfolio</p>
+            <button class="btn">View Project</button>
         </div>
-        <div class="card" data-aos="zoom-in" data-aos-delay="200">
+
+        <div class="card project">
             <img src="project3.jpg">
-            <p>UI Design</p>
+            <p>UI Design Concept</p>
+            <button class="btn">View Project</button>
         </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+    <h2>Let's Work Together</h2>
+    <div class="contact-box">
+        <p>Email: your@email.com</p>
+        <p>WhatsApp: +92xxxxxxxxxx</p>
+        <button class="btn">Start a Project</button>
     </div>
 </section>
 
 <footer>
     <p>© 2026 Fahad</p>
 </footer>
-
-<!-- AOS Script -->
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-<script>
-AOS.init({
-    duration: 1000,
-    once: true
-});
-</script>
 
 </body>
 </html>
