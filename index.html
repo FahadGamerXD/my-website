@@ -3,35 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fahad | Ultra Pro Portfolio</title>
+<title>Fahad | Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
-    background: radial-gradient(circle at top, #0f172a, #020617);
+    background: linear-gradient(135deg, #0f172a, #020617);
     color: white;
-    overflow-x: hidden;
-}
-
-/* CURSOR GLOW */
-.cursor {
-    width: 20px;
-    height: 20px;
-    background: #38bdf8;
-    position: fixed;
-    border-radius: 50%;
-    pointer-events: none;
-    mix-blend-mode: difference;
-    transform: translate(-50%, -50%);
 }
 
 /* NAVBAR */
@@ -39,11 +26,14 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 20px 60px;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    background: rgba(2,6,23,0.6);
+    background: rgba(2,6,23,0.8);
     backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+}
+
+header h1 {
+    color: #38bdf8;
 }
 
 nav a {
@@ -55,8 +45,8 @@ nav a {
 
 nav a::after {
     content: "";
-    height: 2px;
     width: 0%;
+    height: 2px;
     background: #38bdf8;
     position: absolute;
     bottom: -5px;
@@ -70,7 +60,6 @@ nav a:hover::after {
 
 /* HERO */
 .hero {
-    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -78,78 +67,116 @@ nav a:hover::after {
     flex-wrap: wrap;
 }
 
-.hero-text h1 {
-    font-size: 50px;
+.hero-text {
+    max-width: 500px;
+}
+
+.hero-text h2 {
+    font-size: 45px;
 }
 
 .hero-text span {
     color: #38bdf8;
-    text-shadow: 0 0 20px #38bdf8;
+    text-shadow: 0 0 15px #38bdf8;
 }
 
-.typing {
-    color: #38bdf8;
-    margin-top: 10px;
+.hero-text p {
+    margin: 20px 0;
+    color: #cbd5f5;
 }
 
 .btn {
-    margin-top: 20px;
+    background: #38bdf8;
     padding: 12px 25px;
-    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
     border: none;
-    border-radius: 10px;
+    color: black;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
     transition: 0.3s;
 }
 
 .btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    background: #0ea5e9;
 }
 
-/* IMAGE */
+/* PROFILE IMAGE */
 .hero img {
     width: 260px;
     border-radius: 50%;
-    box-shadow: 0 0 50px rgba(56,189,248,0.7);
-    animation: float 4s ease-in-out infinite;
+    border: 4px solid #38bdf8;
+    box-shadow: 0 0 40px rgba(56,189,248,0.6);
+    animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float {
-    50% { transform: translateY(-20px); }
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
 }
 
-/* SECTION */
+/* SECTIONS */
 .section {
-    padding: 100px 20px;
+    padding: 80px 20px;
     text-align: center;
 }
 
-/* CARDS */
-.card-container {
+.section h2 {
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+/* SKILLS */
+.skills {
     display: flex;
     justify-content: center;
     gap: 30px;
     flex-wrap: wrap;
 }
 
-.card {
-    width: 250px;
-    padding: 20px;
-    border-radius: 15px;
+.skill {
     background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(15px);
-    transition: 0.4s;
+    padding: 20px;
+    border-radius: 12px;
+    width: 150px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
 }
 
-.card:hover {
-    transform: translateY(-15px) scale(1.05);
+.skill:hover {
+    transform: translateY(-10px);
+}
+
+/* PROJECTS */
+.projects {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.project {
+    width: 250px;
+    background: rgba(255,255,255,0.05);
+    padding: 15px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.project:hover {
+    transform: scale(1.05);
+}
+
+.project img {
+    width: 100%;
+    border-radius: 10px;
 }
 
 /* FOOTER */
 footer {
-    padding: 20px;
     text-align: center;
+    padding: 20px;
     background: #020617;
 }
 </style>
@@ -157,96 +184,72 @@ footer {
 
 <body>
 
-<div class="cursor"></div>
-
 <header>
-    <h2>Fahad</h2>
+    <h1>Fahad</h1>
     <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Skills</a>
+        <a href="#">Projects</a>
+        <a href="#">Contact</a>
     </nav>
 </header>
 
 <!-- HERO -->
-<section class="hero" id="home">
+<section class="hero">
     <div class="hero-text">
-        <h1>Hi, I'm <span>Fahad</span></h1>
-        <h3 class="typing"></h3>
-        <button class="btn">🚀 Hire Me</button>
+        <h2>Hello, I'm <span>Fahad</span> 👋</h2>
+        <p>Passionate Frontend Developer crafting modern and high-performance websites.</p>
+        <button class="btn">🚀 Let's Work Together</button>
     </div>
 
-    <img src="myphoto.jpg">
+    <img src="myphoto.jpg" alt="My Photo">
 </section>
 
 <!-- ABOUT -->
-<section class="section" id="about">
+<section class="section">
     <h2>About Me</h2>
-    <p>I create high-quality modern websites with clean UI and smooth UX.</p>
+    <p>I am a frontend developer focused on creating clean, modern and user-friendly websites. Currently improving my skills in JavaScript and UI design 🚀</p>
 </section>
 
 <!-- SKILLS -->
-<section class="section" id="skills">
-    <h2>Skills</h2>
-    <div class="card-container">
-        <div class="card">HTML</div>
-        <div class="card">CSS</div>
-        <div class="card">JavaScript</div>
+<section class="section">
+    <h2>My Skills</h2>
+    <div class="skills">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
     </div>
 </section>
 
 <!-- PROJECTS -->
-<section class="section" id="projects">
+<section class="section">
     <h2>Projects</h2>
-    <div class="card-container">
-        <div class="card">Landing Page</div>
-        <div class="card">Portfolio</div>
-        <div class="card">UI Design</div>
+    <div class="projects">
+        <div class="project">
+            <img src="project1.jpg">
+            <p>Landing Page Design</p>
+        </div>
+        <div class="project">
+            <img src="project2.jpg">
+            <p>Portfolio Website</p>
+        </div>
+        <div class="project">
+            <img src="project3.jpg">
+            <p>UI Design Concept</p>
+        </div>
     </div>
 </section>
 
+<!-- CONTACT -->
+<section class="section">
+    <h2>Contact Me</h2>
+    <p>Email: your@email.com</p>
+</section>
+
 <footer>
-    <p>© 2026 Fahad</p>
+    <p>© 2026 Fahad | All Rights Reserved</p>
 </footer>
-
-<script>
-// CURSOR
-const cursor = document.querySelector(".cursor");
-document.addEventListener("mousemove", e => {
-    cursor.style.top = e.clientY + "px";
-    cursor.style.left = e.clientX + "px";
-});
-
-// TYPING EFFECT
-const text = ["Frontend Developer", "UI Designer", "Creative Thinker"];
-let i = 0, j = 0, current = "", isDeleting = false;
-
-function type() {
-    current = text[i];
-    
-    if (isDeleting) {
-        j--;
-    } else {
-        j++;
-    }
-
-    document.querySelector(".typing").textContent = current.substring(0, j);
-
-    if (!isDeleting && j === current.length) {
-        isDeleting = true;
-        setTimeout(type, 1000);
-    } else if (isDeleting && j === 0) {
-        isDeleting = false;
-        i = (i + 1) % text.length;
-        setTimeout(type, 300);
-    } else {
-        setTimeout(type, isDeleting ? 50 : 100);
-    }
-}
-
-type();
-</script>
 
 </body>
 </html>
