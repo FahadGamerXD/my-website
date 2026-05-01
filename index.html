@@ -3,180 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fahad | Portfolio</title>
+<title>Fahad | Premium Portfolio</title>
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+
+<!-- AOS Animation -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
 }
 
 body {
-    background: linear-gradient(135deg, #0f172a, #020617);
+    background: linear-gradient(135deg, #020617, #0f172a);
     color: white;
 }
 
 /* NAVBAR */
 header {
+    position: fixed;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 20px 60px;
-    background: rgba(2,6,23,0.8);
-    backdrop-filter: blur(10px);
-    position: sticky;
-    top: 0;
-}
-
-header h1 {
-    color: #38bdf8;
-}
-
-nav a {
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
-    position: relative;
-}
-
-nav a::after {
-    content: "";
-    width: 0%;
-    height: 2px;
-    background: #38bdf8;
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    transition: 0.3s;
-}
-
-nav a:hover::after {
-    width: 100%;
+    background: rgba(2,6,23,0.7);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
 }
 
 /* HERO */
 .hero {
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 100px 20px;
     flex-wrap: wrap;
 }
 
-.hero-text {
-    max-width: 500px;
-}
-
-.hero-text h2 {
-    font-size: 45px;
+.hero-text h1 {
+    font-size: 55px;
 }
 
 .hero-text span {
     color: #38bdf8;
-    text-shadow: 0 0 15px #38bdf8;
-}
-
-.hero-text p {
-    margin: 20px 0;
-    color: #cbd5f5;
+    text-shadow: 0 0 25px #38bdf8;
 }
 
 .btn {
-    background: #38bdf8;
-    padding: 12px 25px;
+    margin-top: 20px;
+    padding: 14px 30px;
+    border-radius: 12px;
     border: none;
-    color: black;
-    border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
     transition: 0.3s;
 }
 
 .btn:hover {
-    transform: scale(1.05);
-    background: #0ea5e9;
+    transform: scale(1.1);
 }
 
-/* PROFILE IMAGE */
+/* IMAGE */
 .hero img {
-    width: 260px;
+    width: 270px;
     border-radius: 50%;
-    border: 4px solid #38bdf8;
-    box-shadow: 0 0 40px rgba(56,189,248,0.6);
-    animation: float 3s ease-in-out infinite;
+    box-shadow: 0 0 60px rgba(56,189,248,0.6);
 }
 
-@keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-/* SECTIONS */
+/* SECTION */
 .section {
-    padding: 80px 20px;
+    padding: 100px 20px;
     text-align: center;
 }
 
-.section h2 {
-    margin-bottom: 30px;
-    font-size: 30px;
-}
-
-/* SKILLS */
-.skills {
+/* GRID */
+.grid {
     display: flex;
-    justify-content: center;
     gap: 30px;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
-.skill {
+/* CARD */
+.card {
+    width: 260px;
+    padding: 25px;
+    border-radius: 15px;
     background: rgba(255,255,255,0.05);
-    padding: 20px;
-    border-radius: 12px;
-    width: 150px;
-    backdrop-filter: blur(10px);
-    transition: 0.3s;
+    backdrop-filter: blur(15px);
+    transition: 0.4s;
 }
 
-.skill:hover {
-    transform: translateY(-10px);
+.card:hover {
+    transform: translateY(-15px);
 }
 
-/* PROJECTS */
-.projects {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.project {
-    width: 250px;
-    background: rgba(255,255,255,0.05);
-    padding: 15px;
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    transition: 0.3s;
-}
-
-.project:hover {
-    transform: scale(1.05);
-}
-
-.project img {
+/* PROJECT IMAGE */
+.card img {
     width: 100%;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 /* FOOTER */
 footer {
-    text-align: center;
     padding: 20px;
+    text-align: center;
     background: #020617;
 }
 </style>
@@ -185,71 +122,73 @@ footer {
 <body>
 
 <header>
-    <h1>Fahad</h1>
+    <h2>Fahad</h2>
     <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Skills</a>
-        <a href="#">Projects</a>
-        <a href="#">Contact</a>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
     </nav>
 </header>
 
 <!-- HERO -->
-<section class="hero">
-    <div class="hero-text">
-        <h2>Hello, I'm <span>Fahad</span> 👋</h2>
-        <p>Passionate Frontend Developer crafting modern and high-performance websites.</p>
-        <button class="btn">🚀 Let's Work Together</button>
+<section class="hero" id="home">
+    <div class="hero-text" data-aos="fade-right">
+        <h1>Hi, I'm <span>Fahad</span></h1>
+        <p>Frontend Developer creating premium web experiences.</p>
+        <button class="btn">🚀 Hire Me</button>
     </div>
 
-    <img src="myphoto.jpg" alt="My Photo">
+    <img src="myphoto.jpg" data-aos="zoom-in">
 </section>
 
 <!-- ABOUT -->
-<section class="section">
+<section class="section" id="about" data-aos="fade-up">
     <h2>About Me</h2>
-    <p>I am a frontend developer focused on creating clean, modern and user-friendly websites. Currently improving my skills in JavaScript and UI design 🚀</p>
+    <p>I design and develop modern, fast and visually stunning websites.</p>
 </section>
 
 <!-- SKILLS -->
-<section class="section">
-    <h2>My Skills</h2>
-    <div class="skills">
-        <div class="skill">HTML</div>
-        <div class="skill">CSS</div>
-        <div class="skill">JavaScript</div>
+<section class="section" id="skills">
+    <h2 data-aos="fade-up">Skills</h2>
+    <div class="grid">
+        <div class="card" data-aos="fade-up">HTML</div>
+        <div class="card" data-aos="fade-up" data-aos-delay="100">CSS</div>
+        <div class="card" data-aos="fade-up" data-aos-delay="200">JavaScript</div>
     </div>
 </section>
 
 <!-- PROJECTS -->
-<section class="section">
-    <h2>Projects</h2>
-    <div class="projects">
-        <div class="project">
+<section class="section" id="projects">
+    <h2 data-aos="fade-up">Projects</h2>
+    <div class="grid">
+        <div class="card" data-aos="zoom-in">
             <img src="project1.jpg">
-            <p>Landing Page Design</p>
+            <p>Landing Page</p>
         </div>
-        <div class="project">
+        <div class="card" data-aos="zoom-in" data-aos-delay="100">
             <img src="project2.jpg">
-            <p>Portfolio Website</p>
+            <p>Portfolio</p>
         </div>
-        <div class="project">
+        <div class="card" data-aos="zoom-in" data-aos-delay="200">
             <img src="project3.jpg">
-            <p>UI Design Concept</p>
+            <p>UI Design</p>
         </div>
     </div>
 </section>
 
-<!-- CONTACT -->
-<section class="section">
-    <h2>Contact Me</h2>
-    <p>Email: fahadmurad554433@email.com</p>
-</section>
-
 <footer>
-    <p>© 2026 Fahad | All Rights Reserved</p>
+    <p>© 2026 Fahad</p>
 </footer>
+
+<!-- AOS Script -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({
+    duration: 1000,
+    once: true
+});
+</script>
 
 </body>
 </html>
