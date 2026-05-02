@@ -3,199 +3,249 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fahad | Frontend Developer</title>
+<title>Premium Portfolio</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Inter',sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter', sans-serif;
 }
 
 body{
-    background:#020617;
-    color:white;
+  background:#0b0f1a;
+  color:white;
+  overflow-x:hidden;
 }
 
 /* NAVBAR */
-header{
-    position:fixed;
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    padding:20px 60px;
-    background:rgba(2,6,23,0.7);
-    backdrop-filter:blur(10px);
-    z-index:1000;
+nav{
+  display:flex;
+  justify-content:space-between;
+  padding:25px 60px;
+  position:fixed;
+  width:100%;
+  z-index:1000;
 }
 
 nav a{
-    color:white;
-    margin:0 15px;
-    text-decoration:none;
+  color:white;
+  text-decoration:none;
+  margin-left:25px;
+  opacity:0.7;
+  transition:0.3s;
 }
+nav a:hover{opacity:1;}
 
 /* HERO */
 .hero{
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:space-around;
-    flex-wrap:wrap;
-    padding-top:80px;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 60px;
 }
 
-.hero-text{
-    max-width:500px;
+.hero h1{
+  font-size:80px;
+  line-height:90px;
+  font-weight:800;
 }
 
-.hero-text h1{
-    font-size:50px;
+.hero span{
+  color:#4cc9f0;
 }
 
-.hero-text span{
-    color:#38bdf8;
+.hero p{
+  margin-top:20px;
+  max-width:400px;
+  opacity:0.7;
 }
 
-.hero-text p{
-    margin:20px 0;
-    color:#cbd5f5;
-}
-
-/* BUTTON */
 .btn{
-    padding:14px 28px;
-    border:none;
-    border-radius:10px;
-    background:#38bdf8;
-    cursor:pointer;
-    font-weight:bold;
+  margin-top:30px;
+  display:inline-block;
+  padding:14px 28px;
+  background:#4cc9f0;
+  color:black;
+  border-radius:30px;
+  text-decoration:none;
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 30px rgba(76,201,240,0.4);
 }
 
 /* IMAGE */
-.hero img{
-    width:260px;
-    border-radius:50%;
-    box-shadow:0 0 40px rgba(56,189,248,0.6);
+.hero-img{
+  width:350px;
+  height:450px;
+  border-radius:200px;
+  overflow:hidden;
+  position:relative;
 }
 
-/* SECTION */
-.section{
-    padding:100px 20px;
-    text-align:center;
+.hero-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-/* GRID */
+/* BIG TEXT SECTION */
+.big-text{
+  padding:120px 60px;
+  background:#f2eee9;
+  color:#111;
+}
+
+.big-text h2{
+  font-size:60px;
+  max-width:800px;
+  line-height:70px;
+}
+
+.big-text span{
+  color:#ff8c42;
+}
+
+/* PROJECTS */
+.projects{
+  padding:100px 60px;
+}
+
 .grid{
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    flex-wrap:wrap;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
 }
 
-/* CARD */
 .card{
-    width:260px;
-    padding:25px;
-    border-radius:12px;
-    background:rgba(255,255,255,0.05);
+  height:200px;
+  background:#111;
+  border-radius:20px;
+  overflow:hidden;
+  position:relative;
+  cursor:pointer;
 }
 
-/* PROJECT */
-.project img{
-    width:100%;
-    border-radius:10px;
+.card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:0.5s;
 }
 
-/* CONTACT BOX */
-.contact-box{
-    background:rgba(255,255,255,0.05);
-    padding:30px;
-    border-radius:15px;
-    max-width:400px;
-    margin:auto;
+.card:hover img{
+  transform:scale(1.1);
 }
 
-footer{
-    text-align:center;
-    padding:20px;
+/* CTA */
+.cta{
+  padding:120px 60px;
+  background:#ff8c42;
+  color:#111;
+  text-align:center;
 }
+
+.cta h2{
+  font-size:50px;
+}
+
+.cta a{
+  margin-top:20px;
+  display:inline-block;
+  color:#111;
+  font-weight:600;
+}
+
+/* SCROLL ANIMATION */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:1s;
+}
+
+.fade.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
 </style>
 </head>
 
 <body>
 
-<header>
-    <h2>Fahad</h2>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#services">Services</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-    </nav>
-</header>
+<!-- NAV -->
+<nav>
+  <h3>Fahad</h3>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Work</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
 
 <!-- HERO -->
-<section class="hero" id="home">
-    <div class="hero-text">
-        <h1>I Build <span>High-Converting Websites</span></h1>
-        <p>I help brands and businesses create modern, fast, and visually stunning websites that convert visitors into customers.</p>
-        <button class="btn">💰 Hire Me Now</button>
-    </div>
+<section class="hero">
+  <div>
+    <h1>I Build <span>Premium</span><br>Web Experiences</h1>
+    <p>Modern, high-converting websites designed to impress and perform.</p>
+    <a href="#" class="btn">Start Project</a>
+  </div>
 
-    <img src="myphoto.jpg">
+  <div class="hero-img">
+    <img src="https://images.unsplash.com/photo-1603415526960-f8f0c92f7b02">
+  </div>
 </section>
 
-<!-- SERVICES -->
-<section class="section" id="services">
-    <h2>What I Offer</h2>
-    <div class="grid">
-        <div class="card">Landing Page Design</div>
-        <div class="card">Portfolio Websites</div>
-        <div class="card">UI/UX Design</div>
-    </div>
+<!-- BIG TEXT -->
+<section class="big-text fade">
+  <h2>
+    I help brands grow with <span>design</span> that people love and remember.
+  </h2>
 </section>
 
 <!-- PROJECTS -->
-<section class="section" id="projects">
-    <h2>My Work</h2>
-    <div class="grid">
-        <div class="card project">
-            <img src="project1.jpg">
-            <p>Modern Landing Page</p>
-            <button class="btn">View Project</button>
-        </div>
-
-        <div class="card project">
-            <img src="project2.jpg">
-            <p>Creative Portfolio</p>
-            <button class="btn">View Project</button>
-        </div>
-
-        <div class="card project">
-            <img src="project3.jpg">
-            <p>UI Design Concept</p>
-            <button class="btn">View Project</button>
-        </div>
+<section class="projects fade">
+  <div class="grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d">
     </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+    </div>
+  </div>
 </section>
 
-<!-- CONTACT -->
-<section class="section" id="contact">
-    <h2>Let's Work Together</h2>
-    <div class="contact-box">
-        <p>Email: your@email.com</p>
-        <p>WhatsApp: +92xxxxxxxxxx</p>
-        <button class="btn">Start a Project</button>
-    </div>
+<!-- CTA -->
+<section class="cta fade">
+  <h2>Let’s build something great</h2>
+  <a href="#">Let’s talk →</a>
 </section>
 
-<footer>
-    <p>© 2026 Fahad</p>
-</footer>
+<script>
+const faders = document.querySelectorAll('.fade');
+
+window.addEventListener('scroll', () => {
+  faders.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100){
+      el.classList.add('show');
+    }
+  });
+});
+</script>
 
 </body>
 </html>
