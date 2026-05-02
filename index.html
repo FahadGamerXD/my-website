@@ -4,15 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robert Alison Portfolio</title>
+    <title>Robert Alison | Career Growth Partner</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
         :root {
-            --bg-color: #1a1a1a;
+            --bg-dark: #1a1a1a;
+            --bg-light: #f9f9f9;
             --text-white: #ffffff;
-            --text-grey: #a0a0a0;
-            --accent-white: rgba(255, 255, 255, 0.1);
+            --text-black: #1a1a1a;
+            --text-grey: #666666;
+            --accent-gold: #c5a880;
         }
 
         * {
@@ -23,201 +25,179 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-white);
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            background: rgba(26, 26, 26, 0.9);
-            backdrop-filter: blur(10px);
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.2rem;
-            letter-spacing: -0.5px;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-grey);
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: white;
-        }
-
-        .cta-nav {
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.85rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            display: flex;
-            min-height: 100vh;
-            padding: 120px 5% 60px;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-        }
-
-        .hero-content {
-            flex: 1;
-            max-width: 600px;
-        }
-
-        .badge {
-            display: inline-block;
-            background: var(--accent-white);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            color: var(--text-grey);
-            margin-bottom: 24px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .hero-content h1 {
-            font-size: 4.5rem;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            font-weight: 600;
-            letter-spacing: -2px;
-        }
-
-        .hero-content p {
-            color: var(--text-grey);
-            font-size: 1.1rem;
-            margin-bottom: 40px;
+            background-color: var(--bg-light);
+            color: var(--text-black);
             line-height: 1.6;
         }
 
-        .btn-main {
+        /* --- HERO SECTION (Dark) --- */
+        .hero-section {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            padding: 100px 8% 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 100vh;
+        }
+
+        .hero-content { flex: 1; max-width: 600px; }
+        .hero-content h1 { font-size: 4.5rem; line-height: 1.1; margin: 20px 0; letter-spacing: -2px; }
+        .hero-image { flex: 1; position: relative; text-align: right; }
+        .hero-image img { width: 85%; border-radius: 20px; }
+
+        /* --- PAIN POINTS SECTION --- */
+        .pain-points {
+            padding: 100px 8%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            text-align: center;
+        }
+        .pain-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .pain-card h3 { margin: 20px 0 10px; font-size: 1.2rem; }
+
+        /* --- WHAT YOU GET SECTION (Dark Split) --- */
+        .features-section {
+            display: flex;
+            background: #111;
+            color: white;
+            min-height: 80vh;
+        }
+        .features-img { flex: 1; background: url('image_cc7bff.jpg') center/cover; } /* Using provided image as placeholder */
+        .features-content { flex: 1; padding: 100px 8%; }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials {
+            padding: 100px 8%;
+            display: flex;
+            justify-content: space-between;
+        }
+        .testimonial-list { width: 50%; }
+        .testimonial-item {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* --- CTA BANNER --- */
+        .cta-banner {
+            margin: 100px 8%;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('image_cc7bff.jpg');
+            background-size: cover;
+            padding: 80px;
+            border-radius: 30px;
+            text-align: center;
+            color: white;
+        }
+        .cta-btn {
             background: white;
             color: black;
-            padding: 16px 32px;
+            padding: 15px 40px;
             border-radius: 30px;
             text-decoration: none;
+            display: inline-block;
+            margin-top: 30px;
             font-weight: 600;
-            font-size: 0.95rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        /* Hero Image Container */
-        .hero-image {
-            flex: 1;
-            position: relative;
-            display: flex;
-            justify-content: center;
+        /* --- FOOTER --- */
+        .footer {
+            padding: 100px 8% 40px;
+            text-align: center;
         }
+        .footer h2 { font-size: 5rem; margin-bottom: 50px; letter-spacing: -3px; }
 
-        .profile-wrapper {
-            width: 85%;
-            position: relative;
-        }
-
-        .profile-wrapper img {
-            width: 100%;
-            border-radius: 24px;
-            filter: grayscale(20%);
-        }
-
-        /* Floating Info Cards */
-        .floating-card {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 16px;
-            border-radius: 16px;
-            font-size: 0.8rem;
-        }
-
-        .stats-card {
-            bottom: 40px;
-            right: -30px;
-            width: 180px;
-        }
-
-        .review-card {
-            bottom: -20px;
-            left: -20px;
-            width: 220px;
-        }
-
-        /* Responsive */
-        @media (max-width: 992px) {
-            .hero { flex-direction: column; text-align: center; }
+        @media (max-width: 768px) {
+            .hero-section, .pain-points, .features-section, .testimonials { flex-direction: column; }
             .hero-content h1 { font-size: 3rem; }
-            .hero-image { width: 100%; }
-            nav ul { display: none; }
+            .features-img { height: 300px; }
+            .feature-grid { grid-template-columns: 1fr; }
+            .footer h2 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">Robert Alison</div>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Testimonials</a></li>
-        </ul>
-        <button class="cta-nav">Book a Free Call</button>
-    </nav>
-
-    <section class="hero">
+    <!-- Hero Section -->
+    <header class="hero-section">
         <div class="hero-content">
-            <span class="badge">Career coaching</span>
+            <span style="border: 1px solid #444; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem;">Career coaching</span>
             <h1>Unlock the Career<br>You Deserve</h1>
-            <p>Struggling to land your dream job or switch careers? I help professionals like you craft winning resumes, ace interviews, and build career confidence.</p>
-            <a href="#" class="btn-main">Read My Full Story <span>→</span></a>
+            <p style="color: #aaa;">I help professionals like you craft winning resumes, ace interviews, and build career confidence.</p>
+            <a href="#" class="cta-btn" style="background: white; color: black; margin-top: 40px;">Read My Full Story →</a>
         </div>
-
         <div class="hero-image">
-            <div class="profile-wrapper">
-                <!-- APNI IMAGE YAHAN LAGAYEIN: image-name.jpg ki jagah apni file ka naam likhein -->
-                <img src="image_cc7bff.jpg" alt="Your Portrait">
-                
-                <div class="floating-card stats-card">
-                    <strong>10K+ Careers Transformed</strong><br>
-                    <span style="color: var(--text-grey)">And counting</span>
-                </div>
+            <img src="image_cc7bff.jpg" alt="Robert Alison">
+        </div>
+    </header>
 
-                <div class="floating-card review-card">
-                    <span style="color: #ffcc00">★</span> 
-                    <strong>90% of learners</strong> report improved career readiness.
-                </div>
+    <!-- Pain Points -->
+    <section class="pain-points">
+        <div class="pain-card"><h3>You're tired of sending resumes and hearing crickets</h3></div>
+        <div class="pain-card"><h3>You feel lost switching careers or re-entering the workforce</h3></div>
+        <div class="pain-card"><h3>You freeze during interviews and forget what to say</h3></div>
+        <div class="pain-card"><h3>You know you deserve better — but don't know where to start</h3></div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="features-img"></div>
+        <div class="features-content">
+            <h2>What You'll Get From Career Coaching</h2>
+            <div class="feature-grid">
+                <div><h4>Career Clarity</h4><p style="color:#888;">Discover the roles that align with your values.</p></div>
+                <div><h4>LinkedIn Makeover</h4><p style="color:#888;">Craft a compelling personal brand.</p></div>
+                <div><h4>Interview Preparation</h4><p style="color:#888;">Get real-time practice and expert feedback.</p></div>
+                <div><h4>Job Search Strategy</h4><p style="color:#888;">Find the right jobs and follow up like a pro.</p></div>
             </div>
         </div>
     </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div style="width: 40%;">
+            <h2 style="font-size: 3rem;">Real Results from Real People</h2>
+        </div>
+        <div class="testimonial-list">
+            <div class="testimonial-item">
+                <p>"I felt trapped in a toxic job for 4 years. Within just 4 weeks, I landed 3 interviews..."</p>
+                <p><strong>- Roberta D.</strong></p>
+            </div>
+            <div class="testimonial-item">
+                <p>"Your resume advice completely changed my approach. I went from zero responses to landing multiple interviews..."</p>
+                <p><strong>- James K.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-banner">
+        <h2>Ready to Write Your Own Success Story?</h2>
+        <a href="#" class="cta-btn">Book Your Free Strategy Call →</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Lets Work Together</p>
+        <h2>robert@alisongmail.com</h2>
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd;">
+        <div style="display: flex; justify-content: space-between; color: #888; font-size: 0.8rem;">
+            <p>© copyright 2026</p>
+            <p>Privacy Policy | Terms & Conditions</p>
+        </div>
+    </footer>
 
 </body>
 </html>
