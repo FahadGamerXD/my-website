@@ -1,255 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fahad | Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio - Luxury Design</title>
+    <style>
+        /* CSS YAHAN SE SHURU HAI */
+        :root {
+            --bg-color: #f7f3f0; /* Off-white luxury background */
+            --accent-color: #f29c7e; /* Peach/Orange accent */
+            --text-dark: #333333;
+            --text-light: #6d645e;
+        }
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-body {
-    background: linear-gradient(135deg, #0f172a, #020617);
-    color: white;
-}
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
 
-/* NAVBAR */
-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 60px;
-    background: rgba(2,6,23,0.8);
-    backdrop-filter: blur(10px);
-    position: sticky;
-    top: 0;
-}
+        .logo {
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
 
-header h1 {
-    color: #38bdf8;
-}
+        .menu-btn {
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-nav a {
-    color: white;
-    margin: 0 15px;
-    text-decoration: none;
-    position: relative;
-}
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 50px;
+            position: relative;
+        }
 
-nav a::after {
-    content: "";
-    width: 0%;
-    height: 2px;
-    background: #38bdf8;
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    transition: 0.3s;
-}
+        .image-container {
+            width: 100%;
+            max-width: 1100px;
+            height: 65vh;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
 
-nav a:hover::after {
-    width: 100%;
-}
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Face accuracy ke liye zaroori hai */
+            display: block;
+        }
 
-/* HERO */
-.hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 100px 20px;
-    flex-wrap: wrap;
-}
+        .hero-title {
+            position: absolute;
+            bottom: -20px;
+            left: 50px;
+            font-size: 14vw;
+            font-weight: 900;
+            color: var(--accent-color);
+            line-height: 0.8;
+            letter-spacing: -5px;
+            pointer-events: none;
+            z-index: 10;
+        }
 
-.hero-text {
-    max-width: 500px;
-}
+        /* Intro Text Section */
+        .intro-section {
+            padding: 150px 50px 100px;
+            max-width: 1000px;
+        }
 
-.hero-text h2 {
-    font-size: 45px;
-}
+        .intro-section h2 {
+            font-size: 4.5rem;
+            font-weight: 600;
+            color: var(--text-light);
+            line-height: 1.1;
+        }
 
-.hero-text span {
-    color: #38bdf8;
-    text-shadow: 0 0 15px #38bdf8;
-}
+        .intro-section span.pill {
+            display: inline-block;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 0 20px;
+            border-radius: 50px;
+            font-style: italic;
+        }
 
-.hero-text p {
-    margin: 20px 0;
-    color: #cbd5f5;
-}
+        /* Services / Projects */
+        .services {
+            padding: 50px;
+            border-top: 1px solid #ddd;
+        }
 
-.btn {
-    background: #38bdf8;
-    padding: 12px 25px;
-    border: none;
-    color: black;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.3s;
-}
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 0;
+            border-bottom: 1px solid #ddd;
+        }
 
-.btn:hover {
-    transform: scale(1.05);
-    background: #0ea5e9;
-}
+        .service-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
 
-/* PROFILE IMAGE */
-.hero img {
-    width: 260px;
-    border-radius: 50%;
-    border: 4px solid #38bdf8;
-    box-shadow: 0 0 40px rgba(56,189,248,0.6);
-    animation: float 3s ease-in-out infinite;
-}
+        /* Footer Section */
+        .footer {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 100px 50px;
+            margin-top: 100px;
+        }
 
-@keyframes float {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
+        .footer h3 {
+            font-size: 4rem;
+            max-width: 800px;
+            line-height: 1.1;
+            margin-bottom: 60px;
+        }
 
-/* SECTIONS */
-.section {
-    padding: 80px 20px;
-    text-align: center;
-}
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 30px;
+            font-size: 2rem;
+        }
 
-.section h2 {
-    margin-bottom: 30px;
-    font-size: 30px;
-}
-
-/* SKILLS */
-.skills {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.skill {
-    background: rgba(255,255,255,0.05);
-    padding: 20px;
-    border-radius: 12px;
-    width: 150px;
-    backdrop-filter: blur(10px);
-    transition: 0.3s;
-}
-
-.skill:hover {
-    transform: translateY(-10px);
-}
-
-/* PROJECTS */
-.projects {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.project {
-    width: 250px;
-    background: rgba(255,255,255,0.05);
-    padding: 15px;
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    transition: 0.3s;
-}
-
-.project:hover {
-    transform: scale(1.05);
-}
-
-.project img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #020617;
-}
-</style>
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .intro-section h2 { font-size: 2.5rem; }
+            .hero-title { font-size: 20vw; left: 20px; }
+            .footer h3 { font-size: 2.5rem; }
+            .service-title { font-size: 1.5rem; }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-    <h1>Fahad</h1>
     <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Skills</a>
-        <a href="#">Projects</a>
-        <a href="#">Contact</a>
+        <div class="logo">JUAN MORA</div>
+        <div class="menu-btn">MENU</div>
     </nav>
-</header>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-text">
-        <h2>Hello, I'm <span>Fahad</span> 👋</h2>
-        <p>Passionate Frontend Developer crafting modern and high-performance websites.</p>
-        <button class="btn">🚀 Let's Work Together</button>
-    </div>
-
-    <img src="myphoto.jpg" alt="My Photo">
-</section>
-
-<!-- ABOUT -->
-<section class="section">
-    <h2>About Me</h2>
-    <p>I am a frontend developer focused on creating clean, modern and user-friendly websites. Currently improving my skills in JavaScript and UI design 🚀</p>
-</section>
-
-<!-- SKILLS -->
-<section class="section">
-    <h2>My Skills</h2>
-    <div class="skills">
-        <div class="skill">HTML</div>
-        <div class="skill">CSS</div>
-        <div class="skill">JavaScript</div>
-    </div>
-</section>
-
-<!-- PROJECTS -->
-<section class="section">
-    <h2>Projects</h2>
-    <div class="projects">
-        <div class="project">
-            <img src="project1.jpg">
-            <p>Landing Page Design</p>
+    <section class="hero">
+        <div class="image-container">
+            <img src="apni-photo.jpg" alt="Your Portrait">
         </div>
-        <div class="project">
-            <img src="project2.jpg">
-            <p>Portfolio Website</p>
-        </div>
-        <div class="project">
-            <img src="project3.jpg">
-            <p>UI Design Concept</p>
-        </div>
-    </div>
-</section>
+        <h1 class="hero-title">JUAN MORA</h1>
+    </section>
 
-<!-- CONTACT -->
-<section class="section">
-    <h2>Contact Me</h2>
-    <p>Email: fahadmurad554433@email.com</p>
-</section>
+    <section class="intro-section">
+        <h2>16 years making users <br> <span class="pill">click</span> and <span class="pill">scroll</span> <br> my designs</h2>
+    </section>
 
-<footer>
-    <p>© 2026 Fahad | All Rights Reserved</p>
-</footer>
+    <section class="services">
+        <p>I help companies to succeed on projects like:</p>
+        
+        <div class="service-item">
+            <div class="service-title">Websites & Landing pages</div>
+            <div class="arrow">→</div>
+        </div>
+
+        <div class="service-item">
+            <div class="service-title">Visual Branding</div>
+            <div class="arrow">→</div>
+        </div>
+
+        <div class="service-item">
+            <div class="service-title">Product Enhancement</div>
+            <div class="arrow">→</div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <h3>Let's build something people remember</h3>
+        <div class="footer-bottom">
+            <span>Let's talk</span>
+            <span style="font-size: 1rem;">© 2026</span>
+        </div>
+    </footer>
 
 </body>
 </html>
