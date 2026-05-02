@@ -1,256 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premium Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fahad | Portfolio</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+        body {
+            background-color: #0a0c10; /* Dark background as seen in your screenshot */
+            color: white;
+            line-height: 1.6;
+        }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Inter', sans-serif;
-}
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+        }
 
-body{
-  background:#0b0f1a;
-  color:white;
-  overflow-x:hidden;
-}
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
 
-/* NAVBAR */
-nav{
-  display:flex;
-  justify-content:space-between;
-  padding:25px 60px;
-  position:fixed;
-  width:100%;
-  z-index:1000;
-}
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 14px;
+        }
 
-nav a{
-  color:white;
-  text-decoration:none;
-  margin-left:25px;
-  opacity:0.7;
-  transition:0.3s;
-}
-nav a:hover{opacity:1;}
+        /* Hero Section Container */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 80vh;
+            padding: 0 8%;
+            gap: 50px;
+        }
 
-/* HERO */
-.hero{
-  height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 60px;
-}
+        /* Left Side: Text Content */
+        .hero-text {
+            flex: 1;
+        }
 
-.hero h1{
-  font-size:80px;
-  line-height:90px;
-  font-weight:800;
-}
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
 
-.hero span{
-  color:#4cc9f0;
-}
+        .hero-text h1 span {
+            color: #34b3e4; /* Light blue color from your screenshot */
+        }
 
-.hero p{
-  margin-top:20px;
-  max-width:400px;
-  opacity:0.7;
-}
+        .hero-text p {
+            font-size: 18px;
+            color: #888;
+            margin-bottom: 30px;
+            max-width: 500px;
+        }
 
-.btn{
-  margin-top:30px;
-  display:inline-block;
-  padding:14px 28px;
-  background:#4cc9f0;
-  color:black;
-  border-radius:30px;
-  text-decoration:none;
-  transition:0.3s;
-}
+        .btn {
+            background-color: #34b3e4;
+            color: #000;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+        }
 
-.btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 10px 30px rgba(76,201,240,0.4);
-}
+        /* Right Side: Image Content */
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
 
-/* IMAGE */
-.hero-img{
-  width:350px;
-  height:450px;
-  border-radius:200px;
-  overflow:hidden;
-  position:relative;
-}
+        .hero-image img {
+            width: 100%;
+            max-width: 450px; /* Aap isko chota bada kar sakte hain */
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(52, 179, 228, 0.2); /* Subtle blue glow */
+            object-fit: cover;
+        }
 
-.hero-img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* BIG TEXT SECTION */
-.big-text{
-  padding:120px 60px;
-  background:#f2eee9;
-  color:#111;
-}
-
-.big-text h2{
-  font-size:60px;
-  max-width:800px;
-  line-height:70px;
-}
-
-.big-text span{
-  color:#ff8c42;
-}
-
-/* PROJECTS */
-.projects{
-  padding:100px 60px;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-
-.card{
-  height:200px;
-  background:#111;
-  border-radius:20px;
-  overflow:hidden;
-  position:relative;
-  cursor:pointer;
-}
-
-.card img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:0.5s;
-}
-
-.card:hover img{
-  transform:scale(1.1);
-}
-
-/* CTA */
-.cta{
-  padding:120px 60px;
-  background:#ff8c42;
-  color:#111;
-  text-align:center;
-}
-
-.cta h2{
-  font-size:50px;
-}
-
-.cta a{
-  margin-top:20px;
-  display:inline-block;
-  color:#111;
-  font-weight:600;
-}
-
-/* SCROLL ANIMATION */
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:1s;
-}
-
-.fade.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-</style>
+        /* Responsive for Mobile */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 50px;
+            }
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- NAV -->
-<nav>
-  <h3>Fahad</h3>
-  <div>
-    <a href="#">Home</a>
-    <a href="#">Work</a>
-    <a href="#">Contact</a>
-  </div>
-</nav>
+    <nav>
+        <div class="logo">Fahad</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Work</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div>
-    <h1>I Build <span>Premium</span><br>Web Experiences</h1>
-    <p>Modern, high-converting websites designed to impress and perform.</p>
-    <a href="#" class="btn">Start Project</a>
-  </div>
-    
-    <!-- Aapki Picture yahan aayegi -->
-    <div class="hero-image">
-        <img src="myphoto.jpg" alt="Fahad">
-    </div>
-</div>
-  <div class="hero-img">
-    <img src="https://images.unsplash.com/photo-1603415526960-f8f0c92f7b02">
-  </div>
-</section>
+    <section class="hero">
+        <div class="hero-text">
+            <h1>I Build <span>Premium</span> <br> Web Experiences</h1>
+            <p>Modern, high-converting websites designed to impress and perform.</p>
+            <button class="btn">Start Project</button>
+        </div>
 
-<!-- BIG TEXT -->
-<section class="big-text fade">
-  <h2>
-    I help brands grow with <span>design</span> that people love and remember.
-  </h2>
-</section>
-
-<!-- PROJECTS -->
-<section class="projects fade">
-  <div class="grid">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d">
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f">
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
-    </div>
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta fade">
-  <h2>Let’s build something great</h2>
-  <a href="#">Let’s talk →</a>
-</section>
-
-<script>
-const faders = document.querySelectorAll('.fade');
-
-window.addEventListener('scroll', () => {
-  faders.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if(top < window.innerHeight - 100){
-      el.classList.add('show');
-    }
-  });
-});
-</script>
+        <div class="hero-image">
+            <!-- Apni file ka sahi naam yahan likhein -->
+            <img src="profile.jpg" alt="Fahad Portrait">
+        </div>
+    </section>
 
 </body>
 </html>
