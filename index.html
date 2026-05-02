@@ -1,138 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fahad | Portfolio</title>
-    <style>
-        /* Basic Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fahad | Portfolio</title>
 
-        body {
-            background-color: #0a0c10; /* Dark background as seen in your screenshot */
-            color: white;
-            line-height: 1.6;
-        }
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
+body {
+    background: linear-gradient(135deg, #0f172a, #020617);
+    color: white;
+}
 
-        .nav-links a {
-            color: #ccc;
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 14px;
-        }
+/* NAVBAR */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 60px;
+    background: rgba(2,6,23,0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+}
 
-        /* Hero Section Container */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 80vh;
-            padding: 0 8%;
-            gap: 50px;
-        }
+header h1 {
+    color: #38bdf8;
+}
 
-        /* Left Side: Text Content */
-        .hero-text {
-            flex: 1;
-        }
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    position: relative;
+}
 
-        .hero-text h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
+nav a::after {
+    content: "";
+    width: 0%;
+    height: 2px;
+    background: #38bdf8;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    transition: 0.3s;
+}
 
-        .hero-text h1 span {
-            color: #34b3e4; /* Light blue color from your screenshot */
-        }
+nav a:hover::after {
+    width: 100%;
+}
 
-        .hero-text p {
-            font-size: 18px;
-            color: #888;
-            margin-bottom: 30px;
-            max-width: 500px;
-        }
+/* HERO */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 100px 20px;
+    flex-wrap: wrap;
+}
 
-        .btn {
-            background-color: #34b3e4;
-            color: #000;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
-        }
+.hero-text {
+    max-width: 500px;
+}
 
-        /* Right Side: Image Content */
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
+.hero-text h2 {
+    font-size: 45px;
+}
 
-        .hero-image img {
-            width: 100%;
-            max-width: 450px; /* Aap isko chota bada kar sakte hain */
-            border-radius: 20px;
-            box-shadow: 0 0 50px rgba(52, 179, 228, 0.2); /* Subtle blue glow */
-            object-fit: cover;
-        }
+.hero-text span {
+    color: #38bdf8;
+    text-shadow: 0 0 15px #38bdf8;
+}
 
-        /* Responsive for Mobile */
-        @media (max-width: 768px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 50px;
-            }
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-        }
-    </style>
+.hero-text p {
+    margin: 20px 0;
+    color: #cbd5f5;
+}
+
+.btn {
+    background: #38bdf8;
+    padding: 12px 25px;
+    border: none;
+    color: black;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background: #0ea5e9;
+}
+
+/* PROFILE IMAGE */
+.hero img {
+    width: 260px;
+    border-radius: 50%;
+    border: 4px solid #38bdf8;
+    box-shadow: 0 0 40px rgba(56,189,248,0.6);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* SECTIONS */
+.section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.section h2 {
+    margin-bottom: 30px;
+    font-size: 30px;
+}
+
+/* SKILLS */
+.skills {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.skill {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 12px;
+    width: 150px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.skill:hover {
+    transform: translateY(-10px);
+}
+
+/* PROJECTS */
+.projects {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.project {
+    width: 250px;
+    background: rgba(255,255,255,0.05);
+    padding: 15px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.project:hover {
+    transform: scale(1.05);
+}
+
+.project img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #020617;
+}
+</style>
 </head>
+
 <body>
 
+<header>
+    <h1>Fahad</h1>
     <nav>
-        <div class="logo">Fahad</div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Work</a>
-            <a href="#">Contact</a>
-        </div>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Skills</a>
+        <a href="#">Projects</a>
+        <a href="#">Contact</a>
     </nav>
+</header>
 
-    <section class="hero">
-        <div class="hero-text">
-            <h1>I Build <span>Premium</span> <br> Web Experiences</h1>
-            <p>Modern, high-converting websites designed to impress and perform.</p>
-            <button class="btn">Start Project</button>
-        </div>
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-text">
+        <h2>Hello, I'm <span>Fahad</span> 👋</h2>
+        <p>Passionate Frontend Developer crafting modern and high-performance websites.</p>
+        <button class="btn">🚀 Let's Work Together</button>
+    </div>
 
-        <div class="hero-image">
-            <!-- Apni file ka sahi naam yahan likhein -->
-            <img src="profile.jpg" alt="Fahad Portrait">
+    <img src="myphoto.jpg" alt="My Photo">
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+    <h2>About Me</h2>
+    <p>I am a frontend developer focused on creating clean, modern and user-friendly websites. Currently improving my skills in JavaScript and UI design 🚀</p>
+</section>
+
+<!-- SKILLS -->
+<section class="section">
+    <h2>My Skills</h2>
+    <div class="skills">
+        <div class="skill">HTML</div>
+        <div class="skill">CSS</div>
+        <div class="skill">JavaScript</div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section">
+    <h2>Projects</h2>
+    <div class="projects">
+        <div class="project">
+            <img src="project1.jpg">
+            <p>Landing Page Design</p>
         </div>
-    </section>
+        <div class="project">
+            <img src="project2.jpg">
+            <p>Portfolio Website</p>
+        </div>
+        <div class="project">
+            <img src="project3.jpg">
+            <p>UI Design Concept</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section">
+    <h2>Contact Me</h2>
+    <p>Email: fahadmurad554433@email.com</p>
+</section>
+
+<footer>
+    <p>© 2026 Fahad | All Rights Reserved</p>
+</footer>
 
 </body>
 </html>
