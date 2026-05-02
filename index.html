@@ -3,120 +3,108 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio - Luxury Design</title>
+    <title>Juan Mora | Portfolio</title>
+    <!-- Google Fonts for Pro Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    
     <style>
-        /* CSS YAHAN SE SHURU HAI */
         :root {
-            --bg-color: #f7f3f0; /* Off-white luxury background */
-            --accent-color: #f29c7e; /* Peach/Orange accent */
-            --text-dark: #333333;
-            --text-light: #6d645e;
+            --primary: #f3967e; /* Luxury Orange */
+            --bg: #f4f1ee;      /* Bone White */
+            --dark: #1a1a1a;
+            --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            line-height: 1.6;
+            background-color: var(--bg);
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            line-height: 1.4;
             overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* --- Navigation --- */
         nav {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 30px 50px;
+            padding: 30px 5%;
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
+            mix-blend-mode: difference;
+            color: white;
         }
 
-        .logo {
-            font-weight: 900;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-        }
+        .logo { font-weight: 900; text-transform: uppercase; letter-spacing: 2px; }
 
-        .menu-btn {
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
+        /* --- Hero Section --- */
         .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 0 50px;
+            text-align: center;
             position: relative;
+            padding-top: 100px;
         }
 
-        .image-container {
-            width: 100%;
-            max-width: 1100px;
-            height: 65vh;
-            overflow: hidden;
-            border-radius: 12px;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Face accuracy ke liye zaroori hai */
-            display: block;
-        }
-
-        .hero-title {
+        .hero-image {
             position: absolute;
-            bottom: -20px;
-            left: 50px;
-            font-size: 14vw;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -55%);
+            width: 400px; /* Adjust according to your photo */
+            z-index: 1;
+            filter: grayscale(20%);
+        }
+
+        .big-name {
+            font-size: 15vw;
             font-weight: 900;
-            color: var(--accent-color);
+            color: var(--primary);
+            text-transform: uppercase;
             line-height: 0.8;
+            z-index: 0;
             letter-spacing: -5px;
             pointer-events: none;
-            z-index: 10;
         }
 
-        /* Intro Text Section */
-        .intro-section {
-            padding: 150px 50px 100px;
-            max-width: 1000px;
+        .hero-subtext {
+            z-index: 2;
+            margin-top: -20px;
+            font-size: 2.5rem;
+            max-width: 600px;
+            font-weight: 700;
         }
 
-        .intro-section h2 {
-            font-size: 4.5rem;
-            font-weight: 600;
-            color: var(--text-light);
-            line-height: 1.1;
-        }
-
-        .intro-section span.pill {
+        .pill {
             display: inline-block;
-            border: 2px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 0 20px;
+            border: 1px solid var(--dark);
             border-radius: 50px;
+            padding: 0 15px;
+            font-family: 'Playfair Display', serif;
             font-style: italic;
+            font-weight: 400;
+            transition: var(--transition);
         }
 
-        /* Services / Projects */
+        .pill:hover {
+            background: var(--dark);
+            color: white;
+        }
+
+        /* --- Services Section --- */
         .services {
-            padding: 50px;
-            border-top: 1px solid #ddd;
+            padding: 100px 5%;
+            background: white;
         }
 
         .service-item {
@@ -125,90 +113,98 @@
             align-items: center;
             padding: 40px 0;
             border-bottom: 1px solid #ddd;
+            text-decoration: none;
+            color: var(--dark);
+            transition: var(--transition);
         }
 
-        .service-title {
-            font-size: 2.5rem;
-            font-weight: bold;
+        .service-item h2 {
+            font-size: 3rem;
+            font-weight: 700;
         }
 
-        /* Footer Section */
-        .footer {
-            background-color: var(--accent-color);
+        .service-item:hover {
+            padding-left: 30px;
+            color: var(--primary);
+        }
+
+        /* --- Footer/CTA --- */
+        .cta {
+            background-color: var(--primary);
+            padding: 120px 5%;
             color: white;
-            padding: 100px 50px;
-            margin-top: 100px;
+            text-align: left;
         }
 
-        .footer h3 {
-            font-size: 4rem;
+        .cta h2 {
+            font-size: 5rem;
             max-width: 800px;
-            line-height: 1.1;
-            margin-bottom: 60px;
+            line-height: 1;
+            margin-bottom: 40px;
         }
 
         .footer-bottom {
             display: flex;
             justify-content: space-between;
-            align-items: flex-end;
+            margin-top: 50px;
             border-top: 1px solid rgba(255,255,255,0.3);
-            padding-top: 30px;
-            font-size: 2rem;
+            padding-top: 20px;
+            font-size: 0.9rem;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
-            .intro-section h2 { font-size: 2.5rem; }
-            .hero-title { font-size: 20vw; left: 20px; }
-            .footer h3 { font-size: 2.5rem; }
-            .service-title { font-size: 1.5rem; }
+            .big-name { font-size: 20vw; }
+            .hero-image { width: 80%; }
+            .service-item h2 { font-size: 1.5rem; }
+            .cta h2 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">JUAN MORA</div>
-        <div class="menu-btn">MENU</div>
+        <div class="logo">Juan Mora</div>
+        <div class="menu">MENU</div>
     </nav>
 
     <section class="hero">
-       <div class="hero-img">
-  <img src="fahad.jpg" alt="Fahad">
-</div>
-        <h1 class="hero-title">JUAN MORA</h1>
-    </section>
+        <h1 class="big-name">JUAN MORA</h1>
+        
+        <!-- Replace 'your-photo.png' with your actual image path -->
+        <img src="your-photo.png" alt="Juan Mora" class="hero-image">
 
-    <section class="intro-section">
-        <h2>16 years making users <br> <span class="pill">click</span> and <span class="pill">scroll</span> <br> my designs</h2>
+        <div class="hero-subtext">
+            16 years making doors <br>
+            <span class="pill">click</span> and <span class="pill">scroll</span> <br>
+            my designs
+        </div>
     </section>
 
     <section class="services">
-        <p>I help companies to succeed on projects like:</p>
+        <p style="text-transform: uppercase; font-size: 0.8rem; margin-bottom: 40px;">I help companies to succeed on projects like:</p>
         
-        <div class="service-item">
-            <div class="service-title">Websites & Landing pages</div>
-            <div class="arrow">→</div>
-        </div>
-
-        <div class="service-item">
-            <div class="service-title">Visual Branding</div>
-            <div class="arrow">→</div>
-        </div>
-
-        <div class="service-item">
-            <div class="service-title">Product Enhancement</div>
-            <div class="arrow">→</div>
-        </div>
+        <a href="#" class="service-item">
+            <h2>Websites & Landing pages</h2>
+            <span>&rarr;</span>
+        </a>
+        <a href="#" class="service-item">
+            <h2>Visual Branding</h2>
+            <span>&rarr;</span>
+        </a>
+        <a href="#" class="service-item">
+            <h2>Product Enhancement</h2>
+            <span>&rarr;</span>
+        </a>
     </section>
 
-    <footer class="footer">
-        <h3>Let's build something people remember</h3>
+    <section class="cta">
+        <h2>Let's build something people remember</h2>
         <div class="footer-bottom">
-            <span>Let's talk</span>
-            <span style="font-size: 1rem;">© 2026</span>
+            <div>Let's talk</div>
+            <div>© 2026</div>
         </div>
-    </footer>
+    </section>
 
 </body>
 </html>
