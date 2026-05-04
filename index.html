@@ -1,225 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TKXEL | Next-Gen AI Evolution</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #007bff;
-            --primary-glow: rgba(0, 123, 255, 0.5);
-            --bg: #020610;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.08);
-            --text-cool: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Art Studio</title>
 
-        /* Custom Cool Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg); }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        
-        body { background-color: var(--bg); color: white; overflow-x: hidden; scroll-behavior: smooth; }
+<style>
+:root{
+--primary:#00e5ff;
+--bg:#05070d;
+--card:rgba(255,255,255,0.04);
+--border:rgba(255,255,255,0.08);
+}
 
-        /* Animated Background Aura */
-        .aura {
-            position: fixed; top: -10%; left: -10%; width: 40%; height: 40%;
-            background: var(--primary); filter: blur(150px); opacity: 0.15;
-            z-index: -1; animation: float 10s infinite alternate;
-        }
-        @keyframes float { from { transform: translate(0, 0); } to { transform: translate(20%, 20%); } }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif;}
+body{background:var(--bg);color:white;}
 
-        /* Navbar */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 8%; position: fixed; width: 100%; top: 0; z-index: 1000;
-            backdrop-filter: blur(25px); border-bottom: 1px solid var(--border);
-        }
-        .logo { font-size: 26px; font-weight: 800; letter-spacing: -1px; cursor: pointer; }
-        .logo span { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
+/* NAV */
+nav{
+display:flex;justify-content:space-between;align-items:center;
+padding:20px 8%;position:fixed;width:100%;
+backdrop-filter:blur(20px);z-index:1000;
+}
+.logo{font-weight:800;font-size:22px;}
+.nav-links{display:flex;gap:30px;list-style:none;}
+.nav-links a{color:#94a3b8;text-decoration:none;font-size:14px;}
+.nav-links a:hover{color:white}
 
-        .nav-links { display: flex; list-style: none; gap: 40px; }
-        .nav-links a { 
-            text-decoration: none; color: #94a3b8; font-size: 14px; 
-            font-weight: 600; transition: 0.4s; text-transform: uppercase; letter-spacing: 1px;
-        }
-        .nav-links a:hover { color: white; text-shadow: 0 0 10px white; }
+/* HERO */
+.hero{
+height:100vh;display:flex;align-items:center;
+padding:0 8%;gap:50px;
+}
+.hero-left{flex:1;}
+.hero-right{flex:1;}
 
-        /* Hero Section */
-        .hero {
-            height: 95vh; display: flex; flex-direction: column; justify-content: center;
-            align-items: center; text-align: center; padding: 0 20px;
-        }
-        .cool-tag {
-            background: rgba(0, 123, 255, 0.1); color: var(--primary);
-            padding: 8px 20px; border-radius: 100px; font-size: 11px;
-            font-weight: 800; letter-spacing: 3px; margin-bottom: 30px;
-            border: 1px solid rgba(0, 123, 255, 0.2);
-        }
-        .hero h1 { 
-            font-size: clamp(50px, 9vw, 95px); font-weight: 800; line-height: 0.9;
-            margin-bottom: 30px; background: var(--text-cool); -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent; letter-spacing: -4px;
-        }
-        .hero p { color: #64748b; max-width: 650px; font-size: 20px; margin-bottom: 50px; font-weight: 400; }
+.hero h1{
+font-size:60px;font-weight:800;line-height:1.1;
+}
+.hero h1 span{color:var(--primary);}
+.hero p{color:#64748b;margin:20px 0;}
 
-        .btn-group { display: flex; gap: 20px; }
-        .btn-main {
-            background: white; color: black; padding: 20px 45px; border-radius: 14px;
-            font-weight: 800; border: none; cursor: pointer; transition: 0.4s;
-        }
-        .btn-main:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 40px rgba(255,255,255,0.1); }
+.btn{
+background:var(--primary);
+padding:15px 30px;border:none;border-radius:10px;
+cursor:pointer;font-weight:700;
+}
 
-        /* Stats Section - NEW EXTRA FEATURE */
-        .stats {
-            display: flex; justify-content: center; gap: 100px; padding: 60px;
-            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.02));
-        }
-        .stat-item h3 { font-size: 35px; font-weight: 800; color: var(--primary); }
-        .stat-item p { color: #475569; font-size: 13px; font-weight: 700; text-transform: uppercase; }
+.hero img{
+width:100%;border-radius:20px;
+}
 
-        /* Trusted Brands Ticker */
-        .ticker {
-            width: 100%; padding: 40px 0; border-top: 1px solid var(--border);
-            overflow: hidden; white-space: nowrap; background: #000;
-        }
-        .ticker-move { display: inline-block; animation: slide 20s linear infinite; }
-        .ticker-move span { 
-            font-size: 20px; font-weight: 800; color: #1e293b; margin-right: 80px; 
-            transition: 0.3s; cursor: default;
-        }
-        .ticker-move span:hover { color: #475569; }
-        @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+/* FEATURES */
+.features{
+display:flex;gap:50px;padding:100px 8%;
+}
+.feature{
+flex:1;background:var(--card);
+padding:30px;border-radius:20px;border:1px solid var(--border);
+}
 
-        /* Project Cards */
-        .work { padding: 120px 8%; }
-        .work h2 { font-size: 50px; font-weight: 800; margin-bottom: 60px; letter-spacing: -2px; }
-        .grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px; margin-bottom: 30px; }
-        .card {
-            position: relative; height: 500px; border-radius: 30px; overflow: hidden;
-            border: 1px solid var(--border); transition: 0.6s cubic-bezier(0.2, 1, 0.3, 1);
-        }
-        .card:hover { border-color: var(--primary); transform: translateY(-10px); }
-        .card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.4; transition: 0.8s; }
-        .card:hover img { opacity: 0.7; transform: scale(1.1); }
-        
-        .card-info { position: absolute; bottom: 50px; left: 50px; }
-        .card-info span { color: var(--primary); font-weight: 800; font-size: 12px; letter-spacing: 2px; }
-        .card-info h3 { font-size: 32px; font-weight: 800; margin-top: 10px; }
+/* GALLERY */
+.gallery{
+padding:100px 8%;
+}
+.gallery h2{font-size:40px;margin-bottom:40px;}
 
-        /* Footer (Ref: image_c02ebf.png) */
-        footer { padding: 100px 8% 50px; background: #000; border-top: 1px solid var(--border); }
-        .f-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 80px; }
-        .f-logo h2 { font-size: 28px; font-weight: 800; margin-bottom: 20px; }
-        .f-logo p { color: #64748b; line-height: 1.8; max-width: 380px; }
-        .f-col h4 { font-size: 16px; margin-bottom: 30px; color: white; }
-        .f-col ul { list-style: none; }
-        .f-col li { margin-bottom: 15px; }
-        .f-col a { color: #64748b; text-decoration: none; transition: 0.3s; font-size: 15px; }
-        .f-col a:hover { color: var(--primary); padding-left: 5px; }
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
 
-        /* Floating Button */
-        .chat {
-            position: fixed; bottom: 40px; right: 40px; width: 65px; height: 65px;
-            background: var(--primary); border-radius: 22px; display: flex;
-            align-items: center; justify-content: center; cursor: pointer;
-            box-shadow: 0 15px 35px rgba(0, 123, 255, 0.4); z-index: 1000; transition: 0.4s;
-        }
-        .chat:hover { transform: rotate(15deg) scale(1.1); }
-    </style>
+.card{
+background:var(--card);
+border-radius:20px;overflow:hidden;
+border:1px solid var(--border);
+transition:.4s;
+cursor:pointer;
+}
+.card:hover{
+transform:translateY(-10px);
+border-color:var(--primary);
+}
+.card img{
+width:100%;height:250px;object-fit:cover;
+}
+.card h3{padding:15px;font-size:16px;}
+
+/* CTA */
+.cta{
+text-align:center;padding:120px 20px;
+}
+.cta h2{font-size:40px;margin-bottom:20px;}
+.cta p{color:#64748b;margin-bottom:30px;}
+
+/* FOOTER */
+footer{
+padding:60px 8%;
+border-top:1px solid var(--border);
+color:#64748b;
+}
+
+/* MODAL */
+.modal{
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.9);
+display:none;align-items:center;justify-content:center;
+z-index:2000;
+}
+.modal img{
+max-width:90%;max-height:90%;
+border-radius:20px;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="aura"></div>
+<nav>
+<div class="logo">AIART<span style="color:var(--primary)">.</span></div>
+<ul class="nav-links">
+<li><a href="#">Home</a></li>
+<li><a href="#">Gallery</a></li>
+<li><a href="#">About</a></li>
+</ul>
+</nav>
 
-    <nav>
-        <div class="logo">TKXEL<span>.</span></div>
-        <ul class="nav-links">
-            <li><a href="#">Solutions</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">Team</a></li>
-            <li><button onclick="alert('Launch!')" class="btn-main" style="padding: 10px 25px; font-size: 13px; border-radius: 30px;">Let's Talk</button></li>
-        </ul>
-    </nav>
+<!-- HERO -->
+<section class="hero">
+<div class="hero-left">
+<h1>Creating AI Artworks That <span>Inspire</span></h1>
+<p>Showcasing high-end AI generated ads and creative visuals.</p>
+<button class="btn">Explore Gallery</button>
+</div>
 
-    <header class="hero">
-        <div class="cool-tag">NEXT GEN AI EVOLUTION 2026</div>
-        <h1>Innovating At <br><span>The Edge.</span></h1>
-        <p>We craft high-scale AI ecosystems and digital architectures for the world's most ambitious enterprises.</p>
-        <div class="btn-group">
-            <button class="btn-main" onclick="alert('Starting...')">Get Started</button>
-            <button class="btn-main" style="background:transparent; color:white; border:1px solid #334155;">Watch Film</button>
-        </div>
-    </header>
+<div class="hero-right">
+<img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0">
+</div>
+</section>
 
-    <section class="stats">
-        <div class="stat-item"><h3>15+</h3><p>Years Exp</p></div>
-        <div class="stat-item"><h3>500+</h3><p>Global Clients</p></div>
-        <div class="stat-item"><h3>98%</h3><p>Success Rate</p></div>
-    </section>
+<!-- FEATURES -->
+<section class="features">
+<div class="feature">
+<h3>Infinite Possibilities</h3>
+<p>Create stunning AI ads with unlimited creativity.</p>
+</div>
 
-    <div class="ticker">
-        <div class="ticker-move">
-            <span>Microsoft</span> <span>Forbes</span> <span>BMW</span> <span>Rolex</span> <span>Adobe</span> <span>Tesla</span> <span>Google</span> <span>Disney</span>
-            <span>Microsoft</span> <span>Forbes</span> <span>BMW</span> <span>Rolex</span> <span>Adobe</span> <span>Tesla</span> <span>Google</span> <span>Disney</span>
-        </div>
-    </div>
+<div class="feature">
+<h3>Dynamic Aesthetics</h3>
+<p>Premium level visuals for brands and campaigns.</p>
+</div>
+</section>
 
-    <section class="work">
-        <h2>Selected Work</h2>
-        <div class="grid">
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=1200">
-                <div class="card-info">
-                    <span>FINTECH</span>
-                    <h3>Global Payments 2.0</h3>
-                </div>
-            </div>
-            <div class="card">
-                <img src="https://images.unsplash.com/photo-1603584173870-7f3ca9128143?auto=format&fit=crop&q=80&w=800">
-                <div class="card-info">
-                    <span>AUTOMOTIVE</span>
-                    <h3>BMW M5 Config</h3>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- GALLERY -->
+<section class="gallery">
+<h2>Featured Works</h2>
 
-    <footer>
-        <div class="f-top">
-            <div class="f-logo">
-                <h2>TKXEL</h2>
-                <p>Leading the way in AI and software engineering since 2009. Serving clients across 5 continents with excellence.</p>
-            </div>
-            <div class="f-col">
-                <h4>Services</h4>
-                <ul>
-                    <li><a href="#">AI Development</a></li>
-                    <li><a href="#">Cloud Security</a></li>
-                    <li><a href="#">Web Architecture</a></li>
-                </ul>
-            </div>
-            <div class="f-col">
-                <h4>Contact</h4>
-                <ul>
-                    <li><a href="#">fahadmurad554433@gmail.com</a></li>
-                    <li><a href="#">+1 (555) 000-111</a></li>
-                    <li><a href="#">Lahore, Pakistan</a></li>
-                </ul>
-            </div>
-        </div>
-        <div style="text-align: center; color: #334155; font-size: 13px; border-top: 1px solid #111; padding-top: 40px;">
-            © 2026 TKXEL. Built with Professional AI Standards.
-        </div>
-    </footer>
+<div class="grid" id="gallery"></div>
+</section>
 
-    <div class="chat" onclick="alert('How can we help?')">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-    </div>
+<!-- CTA -->
+<section class="cta">
+<h2>Ready to Experience More?</h2>
+<p>Explore full collection of AI Ads</p>
+<button class="btn">Enter Gallery</button>
+</section>
+
+<footer>
+<p>© 2026 AI Art Studio</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<img id="modalImg">
+</div>
+
+<script>
+const ads = [
+{
+title:"Lay's Ad",
+img:"/mnt/data/AI-Art-Studio-Creating-AI-Artworks-That-Inspire-05-03-2026_11_46_PM.png"
+},
+{
+title:"Car Ad",
+img:"https://images.unsplash.com/photo-1503376780353-7e6692767b70"
+},
+{
+title:"Perfume Ad",
+img:"https://images.unsplash.com/photo-1585386959984-a4155224a1ad"
+}
+];
+
+const gallery = document.getElementById("gallery");
+
+ads.forEach(ad=>{
+const div=document.createElement("div");
+div.classList.add("card");
+
+div.innerHTML=`
+<img src="${ad.img}">
+<h3>${ad.title}</h3>
+`;
+
+div.onclick=()=>{
+document.getElementById("modal").style.display="flex";
+document.getElementById("modalImg").src=ad.img;
+};
+
+gallery.appendChild(div);
+});
+
+document.getElementById("modal").onclick=()=>{
+document.getElementById("modal").style.display="none";
+};
+</script>
 
 </body>
 </html>
