@@ -14,11 +14,24 @@
 --border:rgba(255,255,255,0.08);
 }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif;}
-body{background:var(--bg);color:white;overflow-x:hidden;}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Plus Jakarta Sans',sans-serif;
+scroll-behavior:smooth;
+}
 
+body{
+background:var(--bg);
+color:white;
+overflow-x:hidden;
+}
+
+/* LOADER */
 #loader{
-position:fixed;top:0;left:0;
+position:fixed;
+top:0;left:0;
 width:100%;height:100%;
 background:#05070d;
 display:flex;
@@ -28,6 +41,7 @@ justify-content:center;
 z-index:9999;
 transition:0.8s;
 }
+
 .spinner{
 width:70px;height:70px;
 border:4px solid rgba(255,255,255,0.1);
@@ -35,20 +49,43 @@ border-top:4px solid var(--primary);
 border-radius:50%;
 animation:spin 1s linear infinite;
 }
+
 @keyframes spin{100%{transform:rotate(360deg);}}
 
+/* NAV */
 nav{
-display:flex;justify-content:space-between;align-items:center;
+display:flex;
+justify-content:space-between;
+align-items:center;
 padding:20px 8%;
-position:fixed;width:100%;
+position:fixed;
+width:100%;
 backdrop-filter:blur(20px);
 z-index:1000;
 }
-.logo{font-weight:800;font-size:22px;}
-.nav-links{display:flex;gap:30px;list-style:none;}
-.nav-links a{color:#94a3b8;text-decoration:none;font-size:14px;}
-.nav-links a:hover{color:white}
 
+.logo{
+font-weight:800;
+font-size:22px;
+}
+
+.nav-links{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+.nav-links a{
+color:#94a3b8;
+text-decoration:none;
+font-size:14px;
+}
+
+.nav-links a:hover{
+color:white;
+}
+
+/* HERO */
 .hero{
 height:100vh;
 display:flex;
@@ -57,16 +94,31 @@ padding:0 8%;
 position:relative;
 background:url('images/myphoto.jpg') center/cover no-repeat;
 }
+
 .hero::after{
 content:"";
 position:absolute;
 width:100%;height:100%;
 background:rgba(0,0,0,0.65);
 }
-.hero-content{position:relative;z-index:2;}
-.hero h1{font-size:100px;font-weight:800;}
-.hero p{margin-top:20px;color:#cbd5f5;font-size:20px;}
 
+.hero-content{
+position:relative;
+z-index:2;
+}
+
+.hero h1{
+font-size:100px;
+font-weight:800;
+}
+
+.hero p{
+margin-top:20px;
+color:#cbd5f5;
+font-size:20px;
+}
+
+/* BUTTON */
 .btn{
 background:var(--primary);
 padding:15px 30px;
@@ -76,14 +128,18 @@ cursor:pointer;
 font-weight:700;
 color:black;
 margin-top:25px;
+text-decoration:none;
+display:inline-block;
 }
 
+/* SERVICES */
 .services{
 padding:100px 8%;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:20px;
 }
+
 .service{
 background:rgba(255,255,255,0.04);
 padding:30px;
@@ -91,16 +147,45 @@ border-radius:20px;
 border:1px solid var(--border);
 }
 
-.cta{text-align:center;padding:100px 20px;}
+/* STATS */
+.stats{
+padding:80px 8%;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+text-align:center;
+}
 
+.stat{
+padding:20px;
+border:1px solid var(--border);
+border-radius:15px;
+background:rgba(255,255,255,0.03);
+}
+
+/* CTA */
+.cta{
+text-align:center;
+padding:100px 20px;
+}
+
+/* CONTACT */
 .contact{
 padding:100px 8%;
 max-width:800px;
 margin:auto;
 }
-.contact h2{text-align:center;margin-bottom:30px;}
-.form-group{margin-bottom:20px;}
-input, textarea{
+
+.contact h2{
+text-align:center;
+margin-bottom:30px;
+}
+
+.form-group{
+margin-bottom:20px;
+}
+
+input,textarea{
 width:100%;
 padding:15px;
 border-radius:10px;
@@ -109,58 +194,102 @@ background:transparent;
 color:white;
 }
 
+/* FOOTER */
 footer{
 padding:60px 8%;
 border-top:1px solid var(--border);
 color:#64748b;
 text-align:center;
 }
+
+/* MOBILE */
+@media(max-width:768px){
+.hero h1{font-size:50px;}
+.nav-links{display:none;}
+}
 </style>
 </head>
 
 <body>
 
+<!-- LOADER -->
 <div id="loader">
 <div class="spinner"></div>
 <h2>Loading AI Studio...</h2>
 </div>
 
+<!-- NAV -->
 <nav>
 <div class="logo">AIART<span style="color:var(--primary)">.</span></div>
+
 <ul class="nav-links">
 <li><a href="#">Home</a></li>
 <li><a href="gallery.html">Gallery</a></li>
 <li><a href="about.html">About</a></li>
-<li><a href="#contact">Contact</a></li>
+<li><a href="#contact" style="color:#00e5ff;font-weight:600;">Contact</a></li>
 </ul>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
 <div class="hero-content">
 <h1>Fahad</h1>
 <p>AI Designer • Creative Ads • Visual Artist</p>
+
+<div style="display:flex;gap:15px;flex-wrap:wrap;">
 <a href="#contact" class="btn">Contact Me</a>
+<a href="gallery.html" class="btn" style="background:transparent;border:1px solid #00e5ff;color:#00e5ff;">
+View Gallery
+</a>
+</div>
+
 </div>
 </section>
 
+<!-- SERVICES -->
 <section class="services">
 <div class="service">
 <h3>Infinite Creativity</h3>
 <p>Generate unlimited AI ad concepts.</p>
 </div>
+
 <div class="service">
 <h3>Premium Design</h3>
 <p>High-end commercial visuals.</p>
 </div>
+
+<div class="service">
+<h3>Brand Identity</h3>
+<p>Full branding solutions for businesses.</p>
+</div>
 </section>
 
+<!-- STATS -->
+<section class="stats">
+<div class="stat">
+<h2>100+</h2>
+<p>Designs</p>
+</div>
+
+<div class="stat">
+<h2>20+</h2>
+<p>Clients</p>
+</div>
+
+<div class="stat">
+<h2>5+</h2>
+<p>Brands</p>
+</div>
+</section>
+
+<!-- CTA -->
 <section class="cta">
 <h2>Ready to Work Together?</h2>
 <p>Let’s create something powerful for your brand.</p>
 <a href="#contact" class="btn">Hire Me</a>
 </section>
 
-<!-- ✅ UPDATED CONTACT -->
+<!-- CONTACT -->
 <section class="contact" id="contact">
 <h2>Contact Me</h2>
 
@@ -179,17 +308,18 @@ text-align:center;
 </div>
 
 <button type="submit" class="btn" id="submit-btn">Send Message</button>
-
 <p id="form-status" style="margin-top:15px;"></p>
 
 </form>
 </section>
 
+<!-- FOOTER -->
 <footer>
 <p>© 2026 AI Art Studio | Designed by Fahad</p>
 </footer>
 
 <script>
+// LOADER
 window.addEventListener("load",()=>{
 setTimeout(()=>{
 document.getElementById("loader").style.opacity="0";
@@ -197,39 +327,38 @@ document.getElementById("loader").style.visibility="hidden";
 },1500);
 });
 
-// ✅ FORMSPREE JS
-const form = document.getElementById("contact-form");
-const status = document.getElementById("form-status");
-const btn = document.getElementById("submit-btn");
+// FORM
+const form=document.getElementById("contact-form");
+const status=document.getElementById("form-status");
+const btn=document.getElementById("submit-btn");
 
-form.addEventListener("submit", async function(e){
+form.addEventListener("submit",async(e)=>{
 e.preventDefault();
 
-const data = new FormData(form);
+const data=new FormData(form);
 
-btn.innerText = "Sending...";
-btn.disabled = true;
+btn.innerText="Sending...";
+btn.disabled=true;
 
 try{
-const response = await fetch("https://formspree.io/f/meenkpaa", {
-method: "POST",
-body: data,
-headers: { 'Accept': 'application/json' }
+const res=await fetch("https://formspree.io/f/meenkpaa",{
+method:"POST",
+body:data,
+headers:{'Accept':'application/json'}
 });
 
-if(response.ok){
-status.innerHTML = "✅ Message sent successfully!";
+if(res.ok){
+status.innerHTML="✅ Message sent successfully!";
 form.reset();
 }else{
-status.innerHTML = "❌ Something went wrong.";
+status.innerHTML="❌ Something went wrong.";
 }
-
 }catch{
-status.innerHTML = "❌ Network error.";
+status.innerHTML="❌ Network error.";
 }
 
-btn.innerText = "Send Message";
-btn.disabled = false;
+btn.innerText="Send Message";
+btn.disabled=false;
 });
 </script>
 
