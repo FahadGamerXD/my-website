@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fahad — AI Art Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple: #7c3aed;
+  --purple-mid: #9d5bf0;
+  --purple-glow: #a855f7;
+  --cyan: #22d3ee;
+  --bg: #0a0612;
+  --bg2: #0f0a1a;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.07);
+  --text: #e2d9f3;
+  --muted: #7a6f9a;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ---- LOADER ---- */
+#loader {
+  position: fixed; inset: 0;
+  background: var(--bg);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.8s, visibility 0.8s;
+}
+.loader-ring {
+  width: 60px; height: 60px;
+  border: 2px solid rgba(124,58,237,0.2);
+  border-top: 2px solid var(--purple-glow);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+#loader p {
+  margin-top: 18px;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---- NOISE OVERLAY ---- */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---- NAV ---- */
+nav {
+  position: fixed; top: 0; width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 6%;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  background: rgba(10,6,18,0.7);
+}
+.logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+}
+.logo span { color: var(--purple-glow); }
+.nav-links {
+  display: flex; gap: 32px; list-style: none;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: white; }
+.nav-cta {
+  background: var(--purple);
+  color: white !important;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-weight: 600 !important;
+}
+.nav-cta:hover { background: var(--purple-mid) !important; color: white !important; }
+
+/* ---- HERO ---- */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 6% 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Purple radial glow background */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -20%; left: 50%;
+  transform: translateX(-20%);
+  width: 900px; height: 700px;
+  background: radial-gradient(ellipse, rgba(124,58,237,0.35) 0%, rgba(124,58,237,0.1) 40%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Floating cubes */
+.cubes-wrap {
+  position: absolute;
+  top: 0; right: 0;
+  width: 55%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  pointer-events: none;
+}
+
+.cube-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 90px);
+  grid-template-rows: repeat(3, 90px);
+  gap: 16px;
+  transform: perspective(700px) rotateX(12deg) rotateY(-18deg);
+  animation: float 7s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: perspective(700px) rotateX(12deg) rotateY(-18deg) translateY(0); }
+  50% { transform: perspective(700px) rotateX(12deg) rotateY(-18deg) translateY(-18px); }
+}
+
+.cube {
+  width: 90px; height: 90px;
+  border-radius: 16px;
+  position: relative;
+  animation: cubePulse 4s ease-in-out infinite;
+}
+.cube::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: 16px;
+  border: 1px solid rgba(124,58,237,0.4);
+}
+.cube-1 { background: linear-gradient(135deg, #3b1f6e, #1e0f3d); animation-delay: 0s; }
+.cube-2 { background: linear-gradient(135deg, #4c1d95, #2d0f62); animation-delay: 0.3s; }
+.cube-3 { background: linear-gradient(135deg, #6d28d9, #3b1f6e); animation-delay: 0.6s; }
+.cube-4 { background: linear-gradient(135deg, #2e1065, #150928); animation-delay: 0.9s; }
+.cube-5 { background: linear-gradient(135deg, #5b21b6, #2d0f62); animation-delay: 1.2s; }
+.cube-6 { background: linear-gradient(135deg, #7c3aed, #4c1d95); animation-delay: 0.4s; }
+.cube-7 { background: linear-gradient(135deg, #1e0f3d, #0a0612); animation-delay: 0.7s; }
+.cube-8 { background: linear-gradient(135deg, #3b1f6e, #1e0f3d); animation-delay: 1s; }
+.cube-9 { background: linear-gradient(135deg, #6d28d9, #4c1d95); animation-delay: 0.2s; }
+.cube-10 { background: linear-gradient(135deg, #4c1d95, #1e0f3d); animation-delay: 0.5s; }
+.cube-11 { background: linear-gradient(135deg, #2d0f62, #0a0612); animation-delay: 0.8s; }
+.cube-12 { background: linear-gradient(135deg, #5b21b6, #3b1f6e); animation-delay: 1.1s; }
+
+@keyframes cubePulse {
+  0%,100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+/* ---- HERO TEXT — Bold plain white like the image ---- */
+.hero-content { position: relative; z-index: 2; max-width: 580px; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(124,58,237,0.15);
+  border: 1px solid rgba(124,58,237,0.3);
+  padding: 7px 16px;
+  border-radius: 100px;
+  font-size: 13px;
+  color: var(--purple-glow);
+  margin-bottom: 28px;
+  font-weight: 500;
+}
+.hero-badge::before {
+  content: '';
+  width: 7px; height: 7px;
+  background: var(--purple-glow);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--purple-glow);
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ✅ HERO H1 — exactly like the image: bold, white, no gradient */
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 7.5vw, 88px);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -2px;
+  color: #ffffff;           /* pure white — no gradient */
+  -webkit-text-fill-color: #ffffff; /* override any gradient */
+}
+
+/* The accent word gets slight purple tint, still solid — not gradient */
+.hero h1 span {
+  color: #ffffff;
+  -webkit-text-fill-color: #ffffff;
+  font-style: italic;       /* italic like Playfair looks elegant */
+}
+
+.hero p {
+  margin-top: 22px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 440px;
+}
+
+.hero-actions {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  margin-top: 36px;
+}
+
+.btn-primary {
+  background: var(--purple);
+  color: white;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.25s;
+  box-shadow: 0 0 30px rgba(124,58,237,0.35);
+}
+.btn-primary:hover {
+  background: var(--purple-mid);
+  transform: translateY(-2px);
+  box-shadow: 0 0 40px rgba(124,58,237,0.5);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.btn-ghost:hover {
+  border-color: rgba(124,58,237,0.5);
+  background: rgba(124,58,237,0.06);
+}
+
+/* Partner logos strip */
+.partners {
+  display: flex; align-items: center; gap: 28px;
+  margin-top: 52px;
+  flex-wrap: wrap;
+}
+.partners p { font-size: 12px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-right: 8px; }
+.partner-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ---- DASHBOARD PREVIEW ---- */
+.dashboard-section {
+  padding: 80px 6%;
+  position: relative;
+}
+
+/* ✅ Section labels — uppercase small, muted purple */
+.section-label {
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--purple-glow);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* ✅ Section titles — bold white Playfair, no gradient */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  color: #ffffff;           /* plain white */
+  letter-spacing: -1px;
+  line-height: 1.15;
+  max-width: 520px;
+}
+
+.section-sub {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 16px;
+  max-width: 460px;
+  line-height: 1.7;
+}
+
+/* dashboard card */
+.dashboard-wrap {
+  margin-top: 50px;
+  background: rgba(15,10,26,0.9);
+  border: 1px solid rgba(124,58,237,0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 80px rgba(124,58,237,0.1), 0 40px 80px rgba(0,0,0,0.4);
+}
+.db-topbar {
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.db-dot { width: 10px; height: 10px; border-radius: 50%; }
+.db-dot:nth-child(1) { background: #ff5f57; }
+.db-dot:nth-child(2) { background: #ffbd2e; }
+.db-dot:nth-child(3) { background: #28c940; }
+.db-title { font-size: 13px; color: var(--muted); margin-left: 8px; font-weight: 500; }
+
+.db-body {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  min-height: 360px;
+}
+.db-sidebar {
+  border-right: 1px solid var(--border);
+  padding: 20px 0;
+}
+.db-nav-item {
+  padding: 10px 20px;
+  font-size: 13px;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex; align-items: center; gap: 10px;
+  transition: all 0.2s;
+}
+.db-nav-item.active {
+  color: white;
+  background: rgba(124,58,237,0.15);
+  border-right: 2px solid var(--purple-glow);
+}
+.db-nav-item:hover:not(.active) { color: white; background: rgba(255,255,255,0.03); }
+
+.db-main { padding: 24px; }
+.db-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.db-stat-card {
+  background: rgba(124,58,237,0.08);
+  border: 1px solid rgba(124,58,237,0.15);
+  border-radius: 12px;
+  padding: 16px;
+}
+.db-stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.db-stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  margin-top: 6px;
+}
+.db-stat-change { font-size: 12px; color: #4ade80; margin-top: 4px; }
+
+/* mini chart */
+.mini-chart {
+  height: 120px;
+  background: rgba(124,58,237,0.05);
+  border: 1px solid rgba(124,58,237,0.12);
+  border-radius: 12px;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.mini-chart svg { width: 100%; height: 100%; }
+
+/* ---- SERVICES ---- */
+.services-section { padding: 100px 6%; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 50px;
+}
+.service-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 32px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 150px; height: 150px;
+  background: radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%);
+  pointer-events: none;
+  transition: all 0.4s;
+}
+.service-card:hover {
+  border-color: rgba(124,58,237,0.4);
+  transform: translateY(-4px);
+  background: rgba(124,58,237,0.06);
+}
+.service-icon {
+  width: 44px; height: 44px;
+  background: rgba(124,58,237,0.18);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+/* ✅ Service card headings — bold white, Playfair */
+.service-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+.service-card p { color: var(--muted); font-size: 15px; line-height: 1.6; }
+
+/* ---- STATS ---- */
+.stats-section {
+  padding: 80px 6%;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0;
+}
+.stat-item {
+  padding: 30px 20px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.stat-item:last-child { border-right: none; }
+
+/* ✅ Stats numbers — bold white, no gradient */
+.stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  font-weight: 900;
+  color: #ffffff;           /* plain white, bold — like the image */
+  line-height: 1;
+}
+.stat-label { font-size: 14px; color: var(--muted); margin-top: 8px; }
+
+/* ---- CTA ---- */
+.cta-section {
+  padding: 120px 6%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(124,58,237,0.2) 0%, transparent 70%);
+}
+
+/* ✅ CTA heading — bold white Playfair */
+.cta-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -1.5px;
+  position: relative;
+}
+.cta-section p {
+  color: var(--muted);
+  font-size: 17px;
+  margin-top: 16px;
+  position: relative;
+}
+.cta-section .btn-primary { margin-top: 36px; position: relative; }
+
+/* ---- CONTACT ---- */
+.contact-section {
+  padding: 100px 6%;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* ✅ Contact heading — bold white Playfair */
+.contact-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: -1px;
+}
+.contact-section > p { color: var(--muted); margin-bottom: 40px; }
+.form-group { margin-bottom: 16px; }
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: white;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group textarea { height: 130px; resize: vertical; }
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: rgba(124,58,237,0.5);
+  background: rgba(124,58,237,0.05);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--muted); }
+#form-status { font-size: 14px; margin-top: 12px; }
+
+/* ---- FOOTER ---- */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+footer p { color: var(--muted); font-size: 14px; }
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+}
+.footer-logo span { color: var(--purple-glow); }
+
+/* ---- RESPONSIVE ---- */
+@media(max-width: 900px) {
+  .cube-grid { display: none; }
+  .hero { min-height: auto; padding: 130px 6% 70px; }
+  .db-body { grid-template-columns: 1fr; }
+  .db-sidebar { display: none; }
+  .db-stats-row { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+}
+@media(max-width: 600px) {
+  .nav-links { display: none; }
+  .db-stats-row { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .hero h1 { font-size: 44px; letter-spacing: -1px; }
+  footer { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-ring"></div>
+  <p>Loading AI Studio</p>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">AI<span>ART</span>.</div>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">AI-Powered Creative Studio</div>
+
+    <h1>Elevate your<br><span>Creative</span><br>efforts.</h1>
+
+    <p>Unlock the full potential of your brand with AI-driven design, creative ads, and premium visual art tailored for modern businesses.</p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        Hire Me
+      </a>
+      <a href="gallery.html" class="btn-ghost">View Gallery →</a>
+    </div>
+
+    <div class="partners">
+      <p>Trusted by</p>
+      <span class="partner-logo">Behance</span>
+      <span class="partner-logo">Fiverr</span>
+      <span class="partner-logo">Upwork</span>
+      <span class="partner-logo">Dribbble</span>
+    </div>
+  </div>
+
+  <!-- Floating cubes -->
+  <div class="cubes-wrap">
+    <div class="cube-grid">
+      <div class="cube cube-1"></div>
+      <div class="cube cube-2"></div>
+      <div class="cube cube-3"></div>
+      <div class="cube cube-4"></div>
+      <div class="cube cube-5"></div>
+      <div class="cube cube-6"></div>
+      <div class="cube cube-7"></div>
+      <div class="cube cube-8"></div>
+      <div class="cube cube-9"></div>
+      <div class="cube cube-10"></div>
+      <div class="cube cube-11"></div>
+      <div class="cube cube-12"></div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD PREVIEW SECTION -->
+<section class="dashboard-section">
+  <div class="section-label">Performance Dashboard</div>
+  <div class="section-title">Harness the power of AI, making design intuitive and effective</div>
+  <div class="section-sub">Track your brand's visual performance across every platform — all in one clean dashboard.</div>
+
+  <div class="dashboard-wrap">
+    <div class="db-topbar">
+      <div class="db-dot"></div>
+      <div class="db-dot"></div>
+      <div class="db-dot"></div>
+      <span class="db-title">Fahad — AI Studio Dashboard</span>
+    </div>
+    <div class="db-body">
+      <div class="db-sidebar">
+        <div class="db-nav-item active">📊 Overview</div>
+        <div class="db-nav-item">🎨 Projects</div>
+        <div class="db-nav-item">📁 Gallery</div>
+        <div class="db-nav-item">🤝 Clients</div>
+        <div class="db-nav-item">⚙️ Settings</div>
+      </div>
+      <div class="db-main">
+        <div class="db-stats-row">
+          <div class="db-stat-card">
+            <div class="db-stat-label">Total Designs</div>
+            <div class="db-stat-num">10.15%</div>
+            <div class="db-stat-change">↑ +12% this month</div>
+          </div>
+          <div class="db-stat-card">
+            <div class="db-stat-label">Client Reach</div>
+            <div class="db-stat-num">35.8K</div>
+            <div class="db-stat-change">↑ +8.3% growth</div>
+          </div>
+          <div class="db-stat-card">
+            <div class="db-stat-label">Conversions</div>
+            <div class="db-stat-num">59.8K</div>
+            <div class="db-stat-change">↑ +22% ROI boost</div>
+          </div>
+        </div>
+        <!-- Mini line chart (SVG) -->
+        <div class="mini-chart">
+          <svg viewBox="0 0 600 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,70 C60,65 100,50 150,40 C200,30 230,55 280,35 C330,15 360,45 410,30 C460,15 500,20 600,10"
+                  fill="none" stroke="#7c3aed" stroke-width="2.5"/>
+            <path d="M0,70 C60,65 100,50 150,40 C200,30 230,55 280,35 C330,15 360,45 410,30 C460,15 500,20 600,10 L600,90 L0,90 Z"
+                  fill="url(#lineGrad)"/>
+            <path d="M0,80 C80,75 140,68 200,60 C260,52 300,70 360,58 C420,46 470,55 600,40"
+                  fill="none" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section">
+  <div class="section-label">What I Do</div>
+  <div class="section-title">Everything your brand needs to stand out</div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">✦</div>
+      <h3>Infinite Creativity</h3>
+      <p>Generate unlimited AI ad concepts — from product visuals to full campaign assets, tailored to your brand voice.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">◈</div>
+      <h3>Premium Design</h3>
+      <p>High-end commercial visuals that compete with top agencies. Studio-quality output at creative-first pricing.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⬡</div>
+      <h3>Brand Identity</h3>
+      <p>Full branding solutions — logos, color systems, typography, and guidelines that tell your story at a glance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num">100+</div>
+      <div class="stat-label">Designs Delivered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">20+</div>
+      <div class="stat-label">Happy Clients</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5+</div>
+      <div class="stat-label">Brands Built</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Ready to Work Together?</h2>
+  <p>Let's create something powerful for your brand.</p>
+  <a href="#contact" class="btn-primary">Start a Project →</a>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <h2>Contact Me</h2>
+  <p>Have a project in mind? Let's talk.</p>
+
+  <form id="contact-form">
+    <div class="form-group">
+      <input type="text" name="name" placeholder="Your Name" required>
+    </div>
+    <div class="form-group">
+      <input type="email" name="email" placeholder="Your Email" required>
+    </div>
+    <div class="form-group">
+      <textarea name="message" placeholder="Your Message" required></textarea>
+    </div>
+    <button type="submit" class="btn-primary" id="submit-btn">Send Message</button>
+    <p id="form-status"></p>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AI<span>ART</span>.</div>
+  <p>© 2026 AI Art Studio · Designed by Fahad</p>
+  <p style="color: #4a4060; font-size: 12px;">AI Designer • Creative Ads • Visual Artist</p>
+</footer>
+
+<script>
+// Loader
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const l = document.getElementById('loader');
+    l.style.opacity = '0';
+    l.style.visibility = 'hidden';
+  }, 1200);
+});
+
+// Form
+const form = document.getElementById('contact-form');
+const status = document.getElementById('form-status');
+const btn = document.getElementById('submit-btn');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const data = new FormData(form);
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  try {
+    const res = await fetch('https://formspree.io/f/meenkpaa', {
+      method: 'POST', body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    status.innerHTML = res.ok
+      ? '✅ Message sent successfully!'
+      : '❌ Something went wrong.';
+    if (res.ok) form.reset();
+  } catch {
+    status.innerHTML = '❌ Network error.';
+  }
+  btn.textContent = 'Send Message';
+  btn.disabled = false;
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.service-card, .db-stat-card, .stat-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
